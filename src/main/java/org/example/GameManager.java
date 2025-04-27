@@ -36,7 +36,7 @@ public class GameManager {
         ui.clearScreen();
         Set<String> confCommands = new HashSet<>(Set.of("yes", "no"));
         Set<String> petTypeCommands = new HashSet<>(Set.of("dog", "cat"));
-        Set<String> colorCommands = new HashSet<>(Set.of("red", "green", "blue", "white"));
+        Set<String> colorCommands = new HashSet<>(Set.of("red", "green", "blue", "white", "black"));
         String creationChoice = InputValidator.getStringInput("Do you want a fast default creation?: ", confCommands);
         if (Objects.equals(creationChoice, "yes")) {
             this.player = new Player("Player", "white");
@@ -49,19 +49,22 @@ public class GameManager {
             String petName = InputValidator.getNonEmptyString("Enter pet's name: ");
             Pet pet = new Pet(petName, petType);
             this.player = new Player(name, color, pet);
+            System.out.println(player.getName());
+            System.out.println(player.getColor());
+            System.out.println(player.getPetName());
+            System.out.println(player.getPetType());
         } else {
             this.player = new Player(name, color);
+            System.out.println(player.getName());
+            System.out.println(player.getColor());
         }
-        System.out.println(player.getName());
-        System.out.println(player.getColor());
-        System.out.println(player.getPetName());
-        System.out.println(player.getPetType());
+
+
         startGame();
     }
 
     public void startGame() {
         isRunning = true;
-        ui.clearScreen();
         while (isRunning) {
             time.update();
             player.update();
@@ -73,7 +76,7 @@ public class GameManager {
     }
 
     private void renderUI() {
-        ui.clearScreen();
+        //ui.clearScreen();
         ui.showMessage("\n--- " + time.getFormattedTime() + " ---");
         ui.displayLocationInfo(world.getCurrentLocation());
         ui.showMessage(player.getStatus());
