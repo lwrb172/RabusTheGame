@@ -1,6 +1,8 @@
 package org.example;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class GameManager {
@@ -10,12 +12,14 @@ public class GameManager {
     private boolean isRunning = false;
     private Scanner scanner;
     private UserInterface ui;
+    private Map<String, Integer> actions;
 
     public GameManager() {
         this.player = new Player("Player");
         this.world = new World();
         this.time = new TimeManager();
         this.ui = new UserInterface();
+        this.actions = new HashMap<>();
         this.scanner = new Scanner(System.in);
     }
 
@@ -37,16 +41,20 @@ public class GameManager {
         ui.showMessage("\n--- " + time.getFormattedTime() + " ---");
         ui.displayLocationInfo(world.getCurrentLocation());
         ui.showMessage(player.getStatus());
-
+        ui.showMessage("Available locations:");
+        List<Location> locations = world.getAllLocations();
+        for (Location location : locations) {
+            System.out.print(location.getName() + ' ');
+        }
+        System.out.println();
         // show NPC
-
         ui.showMessage("Actions:");
-
         int i = 1;
         for (Action action : world.getCurrentLocation().getActions()) {
             ui.showMessage(i++ + ". " + action.getName() + " (" + action.getDescription() + ")");
+            actions.put(action.getName(), i);
         }
-        ui.showMessage("Enter action number or location name: ");
+        ui.showMessage("Enter action or location name: ");
     }
 
     private void handleInput() {
@@ -56,25 +64,46 @@ public class GameManager {
             case "exit":
                 isRunning = false;
                 break;
-            case "faster":
-                time.increaseSpeed();
-                System.out.println("Speed: " + time.getSpeed());
+            case "eat":
+                if (actions.containsKey("Eat")) {
+                    System.out.println("Chose item number to eat:");
+                    List<Item> foods = player.getInventory();
+                    int i = 1;
+                    for (Item food : foods) {
+                        if (food.getType().equals("food")) {
+                            System.out.print(i++ + "." + food.getName() + ' ');
+                        } else {
+                            foods.remove(food);
+                        }
+                    }
+                    System.out.println();
+                    String chosenFood = scanner.nextLine();
+                    player.eat(foods.get(Integer.parseInt(chosenFood)-1));
+                } else {
+                    System.out.println("Action not available.");
+                }
                 break;
-            case "slower":
-                time.decreaseSpeed();
-                System.out.println("Speed: " + time.getSpeed());
+            case "sleep":
+                if (actions.containsKey("Sleep")) {
+                    System.out.println("How many hours you want to sleep?");
+                    String hours = scanner.nextLine();
+                    player.sleep(Integer.parseInt(hours));
+                    time.setHour(time.getHour() + Integer.parseInt(hours));
+                } else {
+                    System.out.println("Action not available.");
+                }
+                break;
+            case "work":
+                if (actions.containsKey("Work")) {
+                    player.work();
+                    time.setHour(time.getHour() + 8);
+                } else {
+                    System.out.println("Action not available.");
+                }
                 break;
             default:
-                try {
-                    int actionIndex = Integer.parseInt(input) - 1;
-                    List<Action> actions = world.getCurrentLocation().getActions();
-                    if (actionIndex >= 0 && actionIndex < actions.size()) {
-                        actions.get(actionIndex).execute(player, time);
-                    }
-                } catch (NumberFormatException e) {
-                    if (!world.moveToLocation(input)) {
-                        System.out.println("Invalid command!");
-                    }
+                if (!world.moveToLocation(input)) {
+                    System.out.println("Invalid command!");
                 }
         }
     }

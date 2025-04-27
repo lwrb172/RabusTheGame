@@ -4,16 +4,15 @@ public class TimeManager {
     private int day;
     private int hour;
     private int minute;
-    private int speed = 1;
 
     public TimeManager() {
         this.day = 1;
-        this.hour = 8;
-        this.minute = 0;
+        this.hour = 7;
+        this.minute = 30;
     }
 
     public void update() {
-        minute += speed;
+        minute += 30;
 
         if (minute >= 60) {
             minute = 0;
@@ -27,20 +26,16 @@ public class TimeManager {
         }
     }
 
-    public void increaseSpeed() {
-        speed = Math.min(speed+1, 10);
-    }
-
-    public void decreaseSpeed() {
-        speed = Math.max(speed-1, 1);
-    }
-
     public boolean isNight() {
         return hour < 6 || hour >= 22;
     }
 
     public String getFormattedTime() {
         return String.format("Day %d, %02d:%02d", day, hour, minute);
+    }
+
+    public void setHour(int hour) {
+        this.hour = hour;
     }
 
     public int getDay() {
@@ -54,9 +49,4 @@ public class TimeManager {
     public int getMinute() {
         return minute;
     }
-
-    public int getSpeed() {
-        return speed;
-    }
-
 }

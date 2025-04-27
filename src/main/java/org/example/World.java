@@ -28,8 +28,10 @@ public class World {
         locations.put("shop", shop);
         locations.put("park", park);
 
-        home.addAction(new Action("Sleep", "Sleep for 8h", 0, 8 * 60));
-        shop.addAction(new Action("Buy food", "Buy food for 20 coins", 10, 3));
+        home.addAction(new Action("Sleep", "Sleep for 8h."));
+        home.addAction(new Action("Eat", "choose food to eat from your inventory."));
+        home.addAction(new Action("Work", "going to work."));
+        shop.addAction(new Action("Buy food", "Buy food for 20 coins."));
 
         NPC helper = new NPC("helper", "This is a NPC. He will guide you and provide help trough your adventures.");
         NPC cashier = new NPC("Cashier", "shop cashier.");
@@ -88,6 +90,4 @@ public class World {
     public List<Location> getAllLocations() {
         return new ArrayList<>(locations.values());
     }
-
-
 }

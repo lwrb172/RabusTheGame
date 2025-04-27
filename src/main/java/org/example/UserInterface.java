@@ -22,7 +22,7 @@ public class UserInterface {
     }
 
     public void displayLocationInfo(Location location) {
-        System.out.println("\n===" + location.getName().toUpperCase() + " ===");
+        System.out.println("\n=== " + location.getName().toUpperCase() + " ===");
         System.out.println(location.getDescription());
     }
 }

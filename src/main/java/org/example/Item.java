@@ -7,6 +7,14 @@ public class Item {
     private String type;
     private int effectValue;
 
+    public Item(String name, String description, int price, String type, int effectValue) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.type = type;
+        this.effectValue = effectValue;
+    }
+
     public void use(Player player) {
 
     }

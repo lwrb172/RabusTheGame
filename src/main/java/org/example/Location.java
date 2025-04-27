@@ -49,4 +49,14 @@ public class Location {
     public String getDescription() {
         return description;
     }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", actions=" + actions +
+                ", npcs=" + npcs +
+                '}';
+    }
 }
