@@ -3,15 +3,7 @@ package org.example;
 import java.util.Scanner;
 
 public class UserInterface {
-    private Scanner scanner = new Scanner(System.in);
-
-    public void displayMainManu() {
-        System.out.println("\n=== RABUŚ THE GAME ===");
-        System.out.println("1. New Game");
-        System.out.println("2. Load Game");
-        System.out.println("3. Exit");
-        System.out.println("Choose: ");
-    }
+    private final Scanner scanner = new Scanner(System.in);
 
     public String getInput() {
         return scanner.nextLine();
@@ -24,5 +16,11 @@ public class UserInterface {
     public void displayLocationInfo(Location location) {
         System.out.println("\n=== " + location.getName().toUpperCase() + " ===");
         System.out.println(location.getDescription());
+    }
+
+    public void clearScreen() {
+        System.out.println("\n".repeat(50));
+        //System.out.print("\033[H\033[2J"); to gdy w terminalu
+        //System.out.flush();
     }
 }

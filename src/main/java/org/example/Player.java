@@ -4,6 +4,7 @@ import java.util.*;
 
 public class Player {
     private String name;
+    private String color;
     private int hunger;
     private int energy;
     private int happiness;
@@ -15,9 +16,25 @@ public class Player {
     private Map<String, Integer> relationships;
     private int streak = 0;
 
-    public Player(String name) {
+    public Player(String name, String color) {
         this.name = name;
-//      this.pet = pet;
+        this.color = color;
+        this.hunger = 100;
+        this.energy = 100;
+        this.happiness = 70;
+        this.coins = 50;
+        this.rand = new Random();
+        this.currentJob = "Jobless";
+        this.inventory = new ArrayList<>();
+        inventory.add(new Item("Apple", "", 10, "food", 30));
+        inventory.add(new Item("Banana", "", 12, "food", 35));
+        this.relationships = new HashMap<>();
+    }
+
+    public Player(String name, String color, Pet pet) {
+        this.name = name;
+        this.color = color;
+        this.pet = pet;
         this.hunger = 100;
         this.energy = 100;
         this.happiness = 70;
@@ -132,4 +149,12 @@ public class Player {
     public List<Item> getInventory() {
         return inventory;
     }
+
+    public String getPetName() { return pet.getName(); }
+
+    public String getPetType() { return pet.getType(); }
+
+    public String getName() { return name; }
+
+    public String getColor() { return color; }
 }

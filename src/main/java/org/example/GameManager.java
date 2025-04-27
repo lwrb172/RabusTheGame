@@ -1,9 +1,6 @@
 package org.example;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class GameManager {
     private Player player;
@@ -15,7 +12,6 @@ public class GameManager {
     private Map<String, Integer> actions;
 
     public GameManager() {
-        this.player = new Player("Player");
         this.world = new World();
         this.time = new TimeManager();
         this.ui = new UserInterface();
@@ -23,21 +19,61 @@ public class GameManager {
         this.scanner = new Scanner(System.in);
     }
 
+    public void startMenu() {
+        System.out.println("\n=== RABUŚ THE GAME ===");
+        int choice = InputValidator.getIntInput("1. Create Character\n2. Exit", 1, 2);
+        switch (choice) {
+            case 1:
+                createCharacter();
+                break;
+            case 2:
+                isRunning = false;
+                break;
+        }
+    }
+
+    public void createCharacter() {
+        ui.clearScreen();
+        Set<String> confCommands = new HashSet<>(Set.of("yes", "no"));
+        Set<String> petTypeCommands = new HashSet<>(Set.of("dog", "cat"));
+        Set<String> colorCommands = new HashSet<>(Set.of("red", "green", "blue", "white"));
+        String creationChoice = InputValidator.getStringInput("Do you want a fast default creation?: ", confCommands);
+        if (Objects.equals(creationChoice, "yes")) {
+            this.player = new Player("Player", "white");
+        }
+        String name = InputValidator.getNonEmptyString("Enter name: ");
+        String color = InputValidator.getStringInput("Enter color: ", colorCommands);
+        String petChoice = InputValidator.getStringInput("Do you want a pet?: ", confCommands);
+        if (Objects.equals(petChoice, "yes")) {
+            String petType = InputValidator.getStringInput("Cat or dog?: ", petTypeCommands);
+            String petName = InputValidator.getNonEmptyString("Enter pet's name: ");
+            Pet pet = new Pet(petName, petType);
+            this.player = new Player(name, color, pet);
+        } else {
+            this.player = new Player(name, color);
+        }
+        System.out.println(player.getName());
+        System.out.println(player.getColor());
+        System.out.println(player.getPetName());
+        System.out.println(player.getPetType());
+        startGame();
+    }
+
     public void startGame() {
         isRunning = true;
-        ui.showMessage("Welcome to the world!");
-
+        ui.clearScreen();
         while (isRunning) {
             time.update();
             player.update();
             world.checkEvents(player, time);
 
             renderUI();
-            handleInput();
+            mainGameInput();
         }
     }
 
     private void renderUI() {
+        ui.clearScreen();
         ui.showMessage("\n--- " + time.getFormattedTime() + " ---");
         ui.displayLocationInfo(world.getCurrentLocation());
         ui.showMessage(player.getStatus());
@@ -57,7 +93,7 @@ public class GameManager {
         ui.showMessage("Enter action or location name: ");
     }
 
-    private void handleInput() {
+    private void mainGameInput() {
         String input = scanner.nextLine().toLowerCase();
 
         switch (input) {

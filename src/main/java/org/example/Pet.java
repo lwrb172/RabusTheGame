@@ -1,8 +1,8 @@
 package org.example;
 
 public class Pet {
-    private String name;
-    private String type;
+    private final String name;
+    private final String type;
     private int hunger;
     private int happiness;
 
