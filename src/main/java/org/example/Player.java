@@ -7,7 +7,7 @@ public class Player {
     private String color;
     private int hunger;
     private int energy;
-    private int happiness;
+    private int hygiene;
     private int coins;
     private Random rand;
     private Pet pet;
@@ -21,7 +21,7 @@ public class Player {
         this.color = color;
         this.hunger = 100;
         this.energy = 100;
-        this.happiness = 70;
+        this.hygiene = 100;
         this.coins = 50;
         this.rand = new Random();
         this.currentJob = "Jobless";
@@ -37,7 +37,7 @@ public class Player {
         this.pet = pet;
         this.hunger = 100;
         this.energy = 100;
-        this.happiness = 70;
+        this.hygiene = 100;
         this.coins = 50;
         this.rand = new Random();
         this.currentJob = "Jobless";
@@ -52,9 +52,10 @@ public class Player {
         energy = Math.max(energy-1, 0);
         if (hunger < 20) {
             energy = Math.max(energy-2, 0);
+            System.out.println("You're hungry!");
         }
         if (energy < 20) {
-            happiness = Math.max(happiness-1, 0);
+            System.out.println("Your energy is low!");
         }
         if (hunger == 100) {
             System.out.println("You died from starvation!");
@@ -66,34 +67,14 @@ public class Player {
 
     public String getStatus() {
         return String.format(
-                "%s\nHunger: %d/100\nEnergy: %d/100\nHappiness: %d/100\nCoins: %d\nJob: %s",
+                "%s\nHunger: %d/100\nEnergy: %d/100\nHygiene: %d/100\nCoins: %d\nJob: %s",
                 name,
                 hunger,
                 energy,
-                happiness,
+                hygiene,
                 coins,
                 currentJob
         );
-    }
-
-//    public String getInventoryStatus() {
-//        if (inventory.isEmpty()) {
-//            return "\nYour inventory is empty!";
-//        }
-//        return "\nInventory:\n" + String.join(", ", inventory);
-//    }
-
-    public void adoptPet(Pet pet) {
-        this.pet = pet;
-        happiness = Math.min(happiness+10, 100);
-        System.out.println("You adopted a " + pet.getType() + "!");
-    }
-
-    public void feedPet(Pet pet) {
-        if (pet != null) {
-            happiness = Math.min(happiness+2, 100);
-            System.out.println("You fed " + pet.getName() + "!");
-        }
     }
 
     public void eat(Item food) {
@@ -106,34 +87,18 @@ public class Player {
         }
     }
 
-    public void sleep(int hours) {
-        energy = Math.min(energy+hours*10, 100);
-        happiness = Math.min(happiness+hours, 100);
-        hunger = Math.max(hunger-hours*5, 0);
-        System.out.println("You slept for " + hours + ".");
-    }
+//    public void sleep(int hours) {
+//        energy = Math.min(energy+hours*10, 100);
+//        hunger = Math.max(hunger-hours*5, 0);
+//        System.out.println("You slept for " + hours + ".");
+//    }
 
-    public void work() {
-        energy = Math.max(energy-20, 0);
-        hunger = Math.max(hunger-20, 0);
-        coins += 100;
-        if (rand.nextInt(100) < 50) {
-            System.out.println("You had a good day at work and earned additional 20 coins!");
-            coins += 20;
-            happiness = Math.min(happiness+10, 0);
-        } else {
-            System.out.println("You had a bad day at work and lost additional 20 energy!");
-            energy = Math.max(energy-20, 0);
-            happiness = Math.max(happiness-10, 0);
-        }
+    public void loseCoins(int amount) {
+        this.coins -= amount;
     }
 
     public void addCoins(int amount) {
         this.coins += amount;
-    }
-
-    public void loseCoins(int amount) {
-        this.coins -= amount;
     }
 
     public void incrementStreak() {
@@ -157,4 +122,20 @@ public class Player {
     public String getName() { return name; }
 
     public String getColor() { return color; }
+
+    public int getHunger() {
+        return hunger;
+    }
+
+    public int getEnergy() {
+        return energy;
+    }
+
+    public void setHunger(int hunger) {
+        this.hunger = hunger;
+    }
+
+    public void setEnergy(int energy) {
+        this.energy = energy;
+    }
 }

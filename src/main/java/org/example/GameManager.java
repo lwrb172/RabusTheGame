@@ -59,7 +59,6 @@ public class GameManager {
             System.out.println(player.getColor());
         }
 
-
         startGame();
     }
 
@@ -105,19 +104,9 @@ public class GameManager {
                 break;
             case "eat":
                 if (actions.containsKey("Eat")) {
-                    System.out.println("Chose item number to eat:");
-                    List<Item> foods = player.getInventory();
-                    int i = 1;
-                    for (Item food : foods) {
-                        if (food.getType().equals("food")) {
-                            System.out.print(i++ + "." + food.getName() + ' ');
-                        } else {
-                            foods.remove(food);
-                        }
-                    }
-                    System.out.println();
+                    List<Item> foods = Action.printFoods(player);
                     String chosenFood = scanner.nextLine();
-                    player.eat(foods.get(Integer.parseInt(chosenFood)-1));
+                    Action.eat(player, foods.get(Integer.parseInt(chosenFood)-1));
                 } else {
                     System.out.println("Action not available.");
                 }
@@ -126,7 +115,7 @@ public class GameManager {
                 if (actions.containsKey("Sleep")) {
                     System.out.println("How many hours you want to sleep?");
                     String hours = scanner.nextLine();
-                    player.sleep(Integer.parseInt(hours));
+                    Action.sleep(player, Integer.parseInt(hours));
                     time.setHour(time.getHour() + Integer.parseInt(hours));
                 } else {
                     System.out.println("Action not available.");
@@ -134,7 +123,7 @@ public class GameManager {
                 break;
             case "work":
                 if (actions.containsKey("Work")) {
-                    player.work();
+                    Action.work(player);
                     time.setHour(time.getHour() + 8);
                 } else {
                     System.out.println("Action not available.");
