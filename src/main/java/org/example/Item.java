@@ -1,11 +1,11 @@
 package org.example;
 
 public class Item {
-    private String name;
-    private String description;
-    private int price;
-    private String type;
-    private int effectValue;
+    private final String name;
+    private final String description;
+    private final int price;
+    private final String type;
+    private final int effectValue;
 
     public Item(String name, String description, int price, String type, int effectValue) {
         this.name = name;

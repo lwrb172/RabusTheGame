@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.actions.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,10 +30,10 @@ public class World {
         locations.put("shop", shop);
         locations.put("park", park);
 
-        home.addAction(new Action("Sleep", "Sleep for 8h."));
-        home.addAction(new Action("Eat", "choose food to eat from your inventory."));
-        home.addAction(new Action("Work", "going to work."));
-        shop.addAction(new Action("Buy food", "Buy food for 20 coins."));
+        home.addAction(new SleepAction());
+        home.addAction(new EatAction());
+        home.addAction(new WorkAction());
+        shop.addAction(new BuyAction());
 
         NPC helper = new NPC("helper", "This is a NPC. He will guide you and provide help trough your adventures.");
         NPC cashier = new NPC("Cashier", "shop cashier.");

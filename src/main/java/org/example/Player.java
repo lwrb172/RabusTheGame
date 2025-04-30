@@ -26,8 +26,8 @@ public class Player {
         this.rand = new Random();
         this.currentJob = "Jobless";
         this.inventory = new ArrayList<>();
-        inventory.add(new Item("Apple", "", 10, "food", 30));
-        inventory.add(new Item("Banana", "", 12, "food", 35));
+        inventory.add(new Item("Apple", "", 10, "food", 15));
+        inventory.add(new Item("Banana", "", 12, "food", 17));
         this.relationships = new HashMap<>();
     }
 

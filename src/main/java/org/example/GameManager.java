@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.actions.Action;
+
 import java.util.*;
 
 public class GameManager {
@@ -9,13 +11,13 @@ public class GameManager {
     private boolean isRunning = false;
     private Scanner scanner;
     private UserInterface ui;
-    private Map<String, Integer> actions;
+    private List<Action> actions;
 
     public GameManager() {
         this.world = new World();
         this.time = new TimeManager();
         this.ui = new UserInterface();
-        this.actions = new HashMap<>();
+        this.actions = new ArrayList<>();
         this.scanner = new Scanner(System.in);
     }
 
@@ -86,53 +88,38 @@ public class GameManager {
         }
         System.out.println();
         // show NPC
+
+        actions = world.getCurrentLocation().getActions();
         ui.showMessage("Actions:");
-        int i = 1;
-        for (Action action : world.getCurrentLocation().getActions()) {
-            ui.showMessage(i++ + ". " + action.getName() + " (" + action.getDescription() + ")");
-            actions.put(action.getName(), i);
+        for (int i = 0; i < actions.size(); i++) {
+            Action action = actions.get(i);
+            ui.showMessage((i+1) + ". " + action.getName() + " (" + action.getDescription() + ")");
         }
-        ui.showMessage("Enter action or location name: ");
+        ui.showMessage("Enter action number or location name:");
     }
 
     private void mainGameInput() {
         String input = scanner.nextLine().toLowerCase();
 
-        switch (input) {
-            case "exit":
-                isRunning = false;
-                break;
-            case "eat":
-                if (actions.containsKey("Eat")) {
-                    List<Item> foods = Action.printFoods(player);
-                    String chosenFood = scanner.nextLine();
-                    Action.eat(player, foods.get(Integer.parseInt(chosenFood)-1));
+        try {
+            int actionIndex = Integer.parseInt(input);
+            actions = world.getCurrentLocation().getActions();
+
+            if (actionIndex > 0 && actionIndex <= actions.size()) {
+                actions.get(actionIndex-1).execute(player, time);
+            } else {
+                System.out.println("Invalid action number!");
+            }
+        } catch (NumberFormatException e) {
+            // if not number - check locations
+            if (!world.moveToLocation(input)) {
+                if (input.equals("exit")) {
+                    System.out.println("You left the game.");
+                    isRunning = false;
                 } else {
-                    System.out.println("Action not available.");
-                }
-                break;
-            case "sleep":
-                if (actions.containsKey("Sleep")) {
-                    System.out.println("How many hours you want to sleep?");
-                    String hours = scanner.nextLine();
-                    Action.sleep(player, Integer.parseInt(hours));
-                    time.setHour(time.getHour() + Integer.parseInt(hours));
-                } else {
-                    System.out.println("Action not available.");
-                }
-                break;
-            case "work":
-                if (actions.containsKey("Work")) {
-                    Action.work(player);
-                    time.setHour(time.getHour() + 8);
-                } else {
-                    System.out.println("Action not available.");
-                }
-                break;
-            default:
-                if (!world.moveToLocation(input)) {
                     System.out.println("Invalid command!");
                 }
+            }
         }
     }
 }
