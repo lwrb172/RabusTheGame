@@ -6,11 +6,11 @@ import java.util.*;
 
 public class GameManager {
     private Player player;
-    private World world;
-    private TimeManager time;
+    private final World world;
+    private final TimeManager time;
     private boolean isRunning = false;
-    private Scanner scanner;
-    private UserInterface ui;
+    private final Scanner scanner;
+    private final UserInterface ui;
     private List<Action> actions;
 
     public GameManager() {
@@ -35,32 +35,32 @@ public class GameManager {
     }
 
     public void createCharacter() {
-        ui.clearScreen();
+        UserInterface.clearScreen();
         Set<String> confCommands = new HashSet<>(Set.of("yes", "no"));
         Set<String> petTypeCommands = new HashSet<>(Set.of("dog", "cat"));
-        Set<String> colorCommands = new HashSet<>(Set.of("red", "green", "blue", "white", "black"));
+        Set<String> colorCommands = new HashSet<>(Set.of("red", "green", "blue", "yellow", "purple", "white", "black"));
         String creationChoice = InputValidator.getStringInput("Do you want a fast default creation?: ", confCommands);
         if (Objects.equals(creationChoice, "yes")) {
             this.player = new Player("Player", "white");
-        }
-        String name = InputValidator.getNonEmptyString("Enter name: ");
-        String color = InputValidator.getStringInput("Enter color: ", colorCommands);
-        String petChoice = InputValidator.getStringInput("Do you want a pet?: ", confCommands);
-        if (Objects.equals(petChoice, "yes")) {
-            String petType = InputValidator.getStringInput("Cat or dog?: ", petTypeCommands);
-            String petName = InputValidator.getNonEmptyString("Enter pet's name: ");
-            Pet pet = new Pet(petName, petType);
-            this.player = new Player(name, color, pet);
-            System.out.println(player.getName());
-            System.out.println(player.getColor());
-            System.out.println(player.getPetName());
-            System.out.println(player.getPetType());
         } else {
-            this.player = new Player(name, color);
-            System.out.println(player.getName());
-            System.out.println(player.getColor());
+            String name = InputValidator.getNonEmptyString("Enter name: ");
+            String color = InputValidator.getStringInput("Enter color: ", colorCommands);
+            String petChoice = InputValidator.getStringInput("Do you want a pet?: ", confCommands);
+            if (Objects.equals(petChoice, "yes")) {
+                String petType = InputValidator.getStringInput("Cat or dog?: ", petTypeCommands);
+                String petName = InputValidator.getNonEmptyString("Enter pet's name: ");
+                Pet pet = new Pet(petName, petType);
+                this.player = new Player(name, color, pet);
+                System.out.println(player.getName());
+                System.out.println(player.getColor());
+                System.out.println(player.getPetName());
+                System.out.println(player.getPetType());
+            } else {
+                this.player = new Player(name, color);
+                System.out.println(player.getName());
+                System.out.println(player.getColor());
+            }
         }
-
         startGame();
     }
 
