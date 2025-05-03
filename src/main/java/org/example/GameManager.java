@@ -38,7 +38,7 @@ public class GameManager {
         UserInterface.clearScreen();
         Set<String> confCommands = new HashSet<>(Set.of("yes", "no"));
         Set<String> petTypeCommands = new HashSet<>(Set.of("dog", "cat"));
-        Set<String> colorCommands = new HashSet<>(Set.of("red", "green", "blue", "yellow", "purple", "white", "black"));
+        Set<String> colorCommands = new HashSet<>(Set.of("red", "green", "blue", "yellow", "pink", "purple", "white", "black"));
         String creationChoice = InputValidator.getStringInput("Do you want a fast default creation?: ", confCommands);
         if (Objects.equals(creationChoice, "yes")) {
             this.player = new Player("Player", "white");

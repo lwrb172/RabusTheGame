@@ -5,7 +5,9 @@ public enum Color {
     GREEN("\u001B[32m"),
     BLUE("\u001B[34m"),
     YELLOW("\u001B[33m"),
+    PINK("\u001B[35m"),
     PURPLE("\u001B[35m"),
+    GRAY("\u001B[90m"),
     BLACK("\u001B[30m"),
     WHITE("\u001B[37m"),
     RESET("\u001B[0m");
