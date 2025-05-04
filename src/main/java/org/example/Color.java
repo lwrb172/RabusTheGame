@@ -8,6 +8,8 @@ public enum Color {
     PINK("\u001B[35m"),
     PURPLE("\u001B[35m"),
     GRAY("\u001B[90m"),
+    BROWN("\u001B[38;5;94m"),
+    DARKBROWN("\u001B[38;5;94m"),
     BLACK("\u001B[30m"),
     WHITE("\u001B[37m"),
     RESET("\u001B[0m");
