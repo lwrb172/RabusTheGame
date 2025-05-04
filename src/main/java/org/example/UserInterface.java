@@ -18,7 +18,7 @@ public class UserInterface {
         System.out.println(location.getDescription());
     }
 
-    public void clearScreen() {
+    public static void clearScreen() {
         System.out.println("\n".repeat(50));
         //System.out.print("\033[H\033[2J"); to gdy w terminalu
         //System.out.flush();
