@@ -1,4 +1,4 @@
-package org.example;
+package org.example.gameManagment;
 
 import java.util.Scanner;
 
@@ -19,8 +19,8 @@ public class UserInterface {
     }
 
     public static void clearScreen() {
-        //System.out.println("\n".repeat(50));
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
+        System.out.println("\n".repeat(50));
+        //System.out.print("\033[H\033[2J");
+        //System.out.flush();
     }
 }

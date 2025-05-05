@@ -1,26 +1,32 @@
-package org.example;
+package org.example.frames;
+
+import org.example.gameManagment.Item;
+import org.example.entities.NPC;
+import org.example.gameManagment.UserInterface;
 
 import java.util.Random;
 
 public class Frame {
     private final String[] coinFlip = { // dodać kolor żółty
-            "  _____\n" + // 1
-            " /       \\\n" +
-            "(    ●    )\n" +
-            " \\_____/",
-            "   .---.  \n" + // 2
-            "  (     )  \n" +
-            "   '---'  ",
-            "    |  \n" + // 3
-            "   ) (  \n" +
-            "    |  ",
-            "   .---.  \n" + // 4
-            "  (     )  \n" +
-            "   '---'  ",
-            "  _____\n" + // 5
-            " /       \\\n" +
-            "(    ●    )\n" +
-            " \\_____/"
+            Color.YELLOW + "  .------.\n" + Color.RESET + // 1
+            Color.YELLOW + " /  ★ ★  \\\n" + Color.RESET +
+            Color.YELLOW + "|  ★ $ ★  |\n" + Color.RESET +
+            Color.YELLOW + " \\  ★ ★  /\n" + Color.RESET +
+            Color.YELLOW + "  '------'" + Color.RESET,
+            Color.YELLOW + "   .---.  \n" + Color.RESET + // 2
+            Color.YELLOW +  "  (  $  )  \n" + Color.RESET +
+            Color.YELLOW + "   '---'  \n\n\n" + Color.RESET,
+            Color.YELLOW + "    |  \n" + Color.RESET + // 3
+            Color.YELLOW + "   ) (  \n" + Color.RESET +
+            Color.YELLOW +  "    |  \n\n\n\n\n\n\n" + Color.RESET,
+            Color.YELLOW +  "   .---.  \n" + Color.RESET + // 2
+            Color.YELLOW + "  (  $  )  \n" + Color.RESET +
+            Color.YELLOW +   "   '---'  \n\n\n" + Color.RESET,
+            Color.YELLOW +   "  .------.\n" + Color.RESET + // 5
+            Color.YELLOW +   " /  ★ ★  \\\n" + Color.RESET +
+            Color.YELLOW +    "|  ★ $ ★  |\n" + Color.RESET +
+            Color.YELLOW +   " \\  ★ ★  /\n" + Color.RESET +
+            Color.YELLOW +   "  '------'" + Color.RESET
     };
 
     private final String[] tv = {
@@ -86,6 +92,24 @@ public class Frame {
             "(_____)"
     };
 
+    private final String[] rabus = {
+            Color.GRAY + "  O  " + Color.RESET,
+            Color.GRAY + " \\|/" + Color.RESET,
+            Color.GRAY + " / \\" + Color.RESET
+    };
+
+    private final String[] npc1 = {
+            Color.YELLOW + "  O  " + Color.RESET,
+            Color.YELLOW + " /|\\" + Color.RESET,
+            Color.YELLOW + " / \\" + Color.RESET
+    };
+
+    private final String[] npc2 = {
+            Color.RED + "  O  " + Color.RESET,
+            Color.RED + " /|\\" + Color.RESET,
+            Color.RED + " / \\" + Color.RESET
+    };
+
     private String[] playerBody = {
             "     ",
             "    ",
@@ -119,34 +143,34 @@ public class Frame {
             "       "
     };
 
-    public void printCoinFlip() throws InterruptedException {
-//        String[] sides = {"ORZEŁ", "RESZKA"};
-//        Random rand = new Random();
-//
-//        System.out.println("Rzucam monetą...");
-//        System.out.println();
-//
-//        // Animacja obracającej się monety
-//        for (int i = 0; i < 20; i++) {
-//            String side = sides[i % 2]; // na zmianę
-//            System.out.print("\r" + "Wynik: " + side);
-//            Thread.sleep(100); // 100 ms opóźnienia
-//        }
+    public void printCoinFlip(String choice) { // dorobic if win if lose
+        String[] sides = {"HEADS", "TAILS"};
+        Random rand = new Random();
 
-        // Losowy wynik
-//        String result = sides[rand.nextInt(2)];
-//        System.out.print("\r" + "Wynik końcowy: " + result + "       \n");
-//        while (true) {
-//            for (String frame : coinFlip) {
-//                UserInterface.clearScreen();
-//                System.out.println(frame);
-//                try {
-//                    Thread.sleep(1500);
-//                } catch (InterruptedException e) {
-//                    System.err.println(e.getMessage());
-//                }
-//            }
-//        }
+        System.out.println("I'm throwing coin...");
+        System.out.println();
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            System.err.println(e.getMessage());
+        }
+
+        String result = "";
+        int i = 0;
+        for (String frame : coinFlip) {
+            UserInterface.clearScreen();
+            System.out.println(frame);
+            String side = sides[rand.nextInt(2)];
+            System.out.print("\r" + "Result: " + side);
+            result = side;
+            i++;
+            try {
+                Thread.sleep(1500);
+            } catch (InterruptedException e) {
+                System.err.println(e.getMessage());
+            }
+        }
+        System.out.print("\r" + "Result: " + result + "       \n");
     }
 
     public void printPlayer() { System.out.print(playerBody[0] + '\n' + playerBody[1] + '\n' + playerBody[2] + '\n'); }
@@ -211,19 +235,13 @@ public class Frame {
     public void setNPC(NPC npc) {
         switch (npc.getName()) {
             case "Rabuś" -> {
-                npcBody[0] = Color.GRAY + "  O  " + Color.RESET;
-                npcBody[1] = Color.GRAY + " \\|/" + Color.RESET;
-                npcBody[2] = Color.GRAY + " / \\" + Color.RESET;
+                insert(rabus, npcBody);
             }
             case "npc1" -> { // do ustalenia
-                npcBody[0] = Color.YELLOW + "  O  " + Color.RESET;
-                npcBody[1] = Color.YELLOW + " /|\\" + Color.RESET;
-                npcBody[2] = Color.YELLOW + " / \\" + Color.RESET;
+                insert(npc1, npcBody);
             }
             case "npc2" -> { // też do ustalenia
-                npcBody[0] = Color.RED + "  O  " + Color.RESET;
-                npcBody[1] = Color.RED + " /|\\" + Color.RESET;
-                npcBody[2] = Color.RED + " / \\" + Color.RESET;
+                insert(npc2, npcBody);
             }
         }
     }

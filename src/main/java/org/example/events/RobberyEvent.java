@@ -1,4 +1,7 @@
-package org.example;
+package org.example.events;
+
+import org.example.entities.Player;
+import org.example.gameManagment.TimeManager;
 
 import java.util.Random;
 

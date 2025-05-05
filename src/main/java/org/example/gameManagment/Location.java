@@ -1,6 +1,7 @@
-package org.example;
+package org.example.gameManagment;
 
 import org.example.actions.Action;
+import org.example.entities.NPC;
 
 import java.util.ArrayList;
 import java.util.List;

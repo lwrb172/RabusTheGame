@@ -1,7 +1,7 @@
 package org.example.actions;
 
-import org.example.Player;
-import org.example.TimeManager;
+import org.example.entities.Player;
+import org.example.gameManagment.TimeManager;
 
 import java.util.Scanner;
 

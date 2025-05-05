@@ -1,4 +1,6 @@
-package org.example;
+package org.example.gameManagment;
+
+import org.example.entities.Player;
 
 public class Item {
     private final String name;

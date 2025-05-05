@@ -1,4 +1,4 @@
-package org.example;
+package org.example.entities;
 
 public class Pet {
     private final String name;

@@ -1,6 +1,8 @@
-package org.example;
+package org.example.gameManagment;
 
 import org.example.actions.Action;
+import org.example.entities.Pet;
+import org.example.entities.Player;
 
 import java.util.*;
 

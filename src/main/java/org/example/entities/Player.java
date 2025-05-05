@@ -1,4 +1,6 @@
-package org.example;
+package org.example.entities;
+
+import org.example.gameManagment.Item;
 
 import java.util.*;
 

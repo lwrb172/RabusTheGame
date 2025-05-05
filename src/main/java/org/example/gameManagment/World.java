@@ -1,6 +1,10 @@
-package org.example;
+package org.example.gameManagment;
 
 import org.example.actions.*;
+import org.example.entities.NPC;
+import org.example.entities.Player;
+import org.example.events.Event;
+import org.example.events.RobberyEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;

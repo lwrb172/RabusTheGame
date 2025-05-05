@@ -1,4 +1,4 @@
-package org.example;
+package org.example.frames;
 
 public enum Color {
     RED("\u001B[31m"),
