@@ -1,11 +1,13 @@
 package org.example;
 
+import java.util.Random;
+
 public class Frame {
     private final String[] coinFlip = { // dodać kolor żółty
-            "  _______\n" + // 1
+            "  _____\n" + // 1
             " /       \\\n" +
             "(    ●    )\n" +
-            " \\_______/",
+            " \\_____/",
             "   .---.  \n" + // 2
             "  (     )  \n" +
             "   '---'  ",
@@ -15,10 +17,10 @@ public class Frame {
             "   .---.  \n" + // 4
             "  (     )  \n" +
             "   '---'  ",
-            "  _______\n" + // 5
+            "  _____\n" + // 5
             " /       \\\n" +
             "(    ●    )\n" +
-            " \\_______/"
+            " \\_____/"
     };
 
     private final String[] tv = {
@@ -117,16 +119,34 @@ public class Frame {
             "       "
     };
 
-    public void printCoinFlip() {
-        for (String frame : coinFlip) {
-            UserInterface.clearScreen();
-            System.out.println(frame);
-            try {
-                Thread.sleep(1500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+    public void printCoinFlip() throws InterruptedException {
+//        String[] sides = {"ORZEŁ", "RESZKA"};
+//        Random rand = new Random();
+//
+//        System.out.println("Rzucam monetą...");
+//        System.out.println();
+//
+//        // Animacja obracającej się monety
+//        for (int i = 0; i < 20; i++) {
+//            String side = sides[i % 2]; // na zmianę
+//            System.out.print("\r" + "Wynik: " + side);
+//            Thread.sleep(100); // 100 ms opóźnienia
+//        }
+
+        // Losowy wynik
+//        String result = sides[rand.nextInt(2)];
+//        System.out.print("\r" + "Wynik końcowy: " + result + "       \n");
+//        while (true) {
+//            for (String frame : coinFlip) {
+//                UserInterface.clearScreen();
+//                System.out.println(frame);
+//                try {
+//                    Thread.sleep(1500);
+//                } catch (InterruptedException e) {
+//                    System.err.println(e.getMessage());
+//                }
+//            }
+//        }
     }
 
     public void printPlayer() { System.out.print(playerBody[0] + '\n' + playerBody[1] + '\n' + playerBody[2] + '\n'); }

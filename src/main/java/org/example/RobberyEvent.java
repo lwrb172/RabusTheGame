@@ -12,7 +12,7 @@ public class RobberyEvent extends Event {
 
     @Override
     public boolean timeTrigger(TimeManager time) {
-        return time.isNight() && rand.nextInt(100) < 50;
+        return rand.nextInt(100) < 30;
     }
 
     @Override

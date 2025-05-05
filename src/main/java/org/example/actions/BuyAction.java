@@ -4,6 +4,7 @@ import org.example.Item;
 import org.example.Player;
 import org.example.TimeManager;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -33,7 +34,7 @@ public class BuyAction implements Action {
         }
         Scanner scanner = new Scanner(System.in);
         if (scanner.hasNextInt()) {
-            int choice = scanner.nextInt();
+            int choice = scanner.nextInt()-1;
             player.getInventory().add(foods.get(choice));
             System.out.println("You bought: '" + foods.get(choice).getName() + "' and it is now in your inventory.");
         } else {
