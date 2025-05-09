@@ -12,11 +12,11 @@ public class TalkAction implements Action {
 
     @Override
     public String getName() {
-        return "";
+        return "Talk";
     }
 
     @Override
     public String getDescription() {
-        return "";
+        return "talk to the npc.";
     }
 }
