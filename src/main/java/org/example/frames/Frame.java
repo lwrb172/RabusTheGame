@@ -226,6 +226,44 @@ public class Frame {
         System.out.println("\n------------------------------------------------------------");
     }
 
+    public void printPark() {
+        System.out.printf(
+                "\n                                          " + Color.BROWN + "v .   ._, |_  .,        \n" +
+                "     " + Color.GREEN + "ccee88oo" + Color.RESET + "                          " + Color.BROWN + "`-._\\/  .  \\ /    |/_      \n" + Color.RESET +
+                "  " + Color.GREEN + "C8O8O8Q8PoOb o8oo" + Color.RESET + "                        " + Color.BROWN + "\\\\  _\\, y | \\//        \n" + Color.RESET +
+                " " + Color.GREEN + "dOB69QO8PdUOpugoO9bD" + Color.RESET + "                " + Color.BROWN + "_\\_.___\\\\, \\\\/ -.\\||       \n" + Color.RESET +
+                Color.GREEN + "CgggbU8OU qOp qOdoUOdcb" + Color.RESET + "                " + Color.BROWN + "`7-,--.`._||  / / ,      \n" + Color.RESET +
+                "    " + Color.GREEN + "6OuU  " + Color.RESET + Color.BROWN + "/" + Color.RESET + Color.GREEN + "p u gcoUodpP" + Color.RESET + "                " + Color.BROWN + "/'     `-. `./ / |/_.'       \n" + Color.RESET +
+                "      " + Color.BROWN + "\\\\\\//  /" + Color.RESET + Color.GREEN + "douUP" + Color.RESET + "                              " + Color.BROWN + "|    |//      \n" +
+                "       " + Color.BROWN + "\\\\\\////" + Color.RESET + "                                   " + Color.BROWN + "|_    /\n" + Color.RESET +
+                "        " + Color.BROWN + "|||/\\" + Color.RESET + "                                    " + Color.BROWN + "|-   |\n" + Color.RESET +
+                "        " + Color.BROWN + "|||\\/" + Color.RESET + "             %s   " + Color.DARKBROWN + "┌────┐" + Color.RESET + "         " + Color.BROWN + "|   =|\n" + Color.RESET +
+                "        " + Color.BROWN + "|||||" + Color.RESET + "             %s   " + Color.DARKBROWN + "(______)" + Color.RESET + "        " + Color.BROWN + "|    |\n" + Color.RESET +
+                "       " + Color.BROWN + "//||||\\" + Color.RESET + "            %s   " + Color.DARKBROWN + "||    ||" + Color.RESET + "       " + Color.BROWN + "/ ,  . \\\n" + Color.RESET,
+                playerBody[0],
+                playerBody[1],
+                playerBody[2]);
+        System.out.println(Color.GREEN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" + Color.RESET);
+    }
+
+    public void printShop() {
+        System.out.println(
+                Color.BROWN + "\n       ║ ║             ║ ║         \n" +
+                Color.BROWN + "       ║ ║             ║ ║         \n" +
+                Color.BROWN + "  _____________________________\n" +
+                Color.BROWN + " /                             \\\n" +
+                Color.BROWN + "|     " + Color.RESET + "_____ _                   " + Color.BROWN + "|\n" + Color.RESET +
+                Color.BROWN + "|    " + Color.RESET + "/ ____| |                  " + Color.BROWN + "|\n" + Color.RESET +
+                Color.BROWN + "|   " + Color.RESET + "| (___ | |__   ___  _ __    " + Color.BROWN + "|\n" + Color.RESET +
+                Color.BROWN + "|    " + Color.RESET + "\\___ \\| '_ \\ / _ \\| '_ \\   " + Color.BROWN + "|\n" + Color.RESET +
+                Color.BROWN + "|    " + Color.RESET + "____) | | | | (_) | |_) |  " + Color.BROWN + "|\n" + Color.RESET +
+                Color.BROWN + "|   " + Color.RESET + "|_____/|_| |_|\\___/| .__/   " + Color.BROWN + "|\n" + Color.RESET +
+                Color.BROWN + "|                      " + Color.RESET + "| |      " + Color.BROWN + "|\n" + Color.RESET +
+                Color.BROWN + "|                      " + Color.RESET + "|_|      " + Color.BROWN + "|\n" + Color.RESET +
+                Color.BROWN + " \\_____________________________/\n" + Color.RESET
+        );
+    }
+
     public void setPlayerColor(Color color) {
         playerBody[0] = color + "  O  " + Color.RESET;
         playerBody[1] = color + " /|\\" + Color.RESET;
