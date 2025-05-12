@@ -7,7 +7,7 @@ import org.example.gameManagment.UserInterface;
 import java.util.Random;
 
 public class Frame {
-    private final String[] coinFlip = { // dodać kolor żółty
+    private final String[] coinFlip = {
             Color.YELLOW + "  .------.\n" + Color.RESET + // 1
             Color.YELLOW + " /  ★ ★  \\\n" + Color.RESET +
             Color.YELLOW + "|  ★ $ ★  |\n" + Color.RESET +
@@ -147,6 +147,7 @@ public class Frame {
         String[] sides = {"HEADS", "TAILS"};
         Random rand = new Random();
 
+        UserInterface.clearScreen();
         System.out.println("I'm throwing coin...");
         System.out.println();
         try {
@@ -171,6 +172,16 @@ public class Frame {
             }
         }
         System.out.print("\r" + "Result: " + result + "       \n");
+
+        if(result.toLowerCase().equals(choice)) {
+            UserInterface.clearScreen();
+            System.out.println("You won!");
+            // TO-DO win
+        } else {
+            UserInterface.clearScreen();
+            System.out.println("You lose ;(");
+            // TO-DO lose
+        }
     }
 
     public void printPlayer() { System.out.print(playerBody[0] + '\n' + playerBody[1] + '\n' + playerBody[2] + '\n'); }
@@ -248,19 +259,27 @@ public class Frame {
 
     public void printShop() {
         System.out.println(
-                Color.BROWN + "\n       ║ ║             ║ ║         \n" +
-                Color.BROWN + "       ║ ║             ║ ║         \n" +
-                Color.BROWN + "  _____________________________\n" +
-                Color.BROWN + " /                             \\\n" +
-                Color.BROWN + "|     " + Color.RESET + "_____ _                   " + Color.BROWN + "|\n" + Color.RESET +
+                Color.BROWN + "\n       ║ ║             ║ ║         \n" + Color.RESET +
+                Color.BROWN + "       ║ ║             ║ ║         \n" + Color.RESET +
+                Color.BROWN + "  _____________________________\n" + Color.RESET +
+                Color.BROWN + " /     " + Color.RESET + "_____ _                 " + Color.BROWN + "\\\n" + Color.RESET +
                 Color.BROWN + "|    " + Color.RESET + "/ ____| |                  " + Color.BROWN + "|\n" + Color.RESET +
                 Color.BROWN + "|   " + Color.RESET + "| (___ | |__   ___  _ __    " + Color.BROWN + "|\n" + Color.RESET +
                 Color.BROWN + "|    " + Color.RESET + "\\___ \\| '_ \\ / _ \\| '_ \\   " + Color.BROWN + "|\n" + Color.RESET +
                 Color.BROWN + "|    " + Color.RESET + "____) | | | | (_) | |_) |  " + Color.BROWN + "|\n" + Color.RESET +
                 Color.BROWN + "|   " + Color.RESET + "|_____/|_| |_|\\___/| .__/   " + Color.BROWN + "|\n" + Color.RESET +
-                Color.BROWN + "|                      " + Color.RESET + "| |      " + Color.BROWN + "|\n" + Color.RESET +
                 Color.BROWN + "|                      " + Color.RESET + "|_|      " + Color.BROWN + "|\n" + Color.RESET +
                 Color.BROWN + " \\_____________________________/\n" + Color.RESET
+        );
+    }
+
+    public void printLogo() {
+        System.out.println(
+                Color.CYAN + "\n ______   ______   ______   __  __   ______       ______  __  __   ______       ______   ______   __    __   ______  \n" + Color.RESET +
+                Color.CYAN + "/\\  == \\ /\\  __ \\ /\\  == \\ /\\ \\/\\ \\ /\\  ___\\     /\\__  _\\/\\ \\_\\ \\ /\\  ___\\     /\\  ___\\ /\\  __ \\ /\\ \"-./  \\ /\\  ___\\  \n" + Color.RESET +
+                Color.CYAN + "\\ \\  __< \\ \\  __ \\\\ \\  __< \\ \\ \\_\\ \\\\ \\___  \\    \\/_/\\ \\/\\ \\  __ \\\\ \\  __\\     \\ \\ \\__ \\\\ \\  __ \\\\ \\ \\-./\\ \\\\ \\  __\\  \n" + Color.RESET +
+                Color.CYAN + " \\ \\_\\ \\_\\\\ \\_\\ \\_\\\\ \\_____\\\\ \\_____\\\\/\\_____\\      \\ \\_\\ \\ \\_\\ \\_\\\\ \\_____\\    \\ \\_____\\\\ \\_\\ \\_\\\\ \\_\\ \\ \\_\\\\ \\_____\\ \n" + Color.RESET +
+                Color.CYAN + "  \\/_/ /_/ \\/_/\\/_/ \\/_____/ \\/_____/ \\/_____/       \\/_/  \\/_/\\/_/ \\/_____/     \\/_____/ \\/_/\\/_/ \\/_/  \\/_/ \\/_____/ " + Color.RESET
         );
     }
 
@@ -275,10 +294,10 @@ public class Frame {
             case "Rabuś" -> {
                 insert(rabus, npcBody);
             }
-            case "npc1" -> { // do ustalenia
+            case "Kacper" -> {
                 insert(npc1, npcBody);
             }
-            case "npc2" -> { // też do ustalenia
+            case "Oliwier" -> {
                 insert(npc2, npcBody);
             }
         }

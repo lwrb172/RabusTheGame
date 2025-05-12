@@ -15,7 +15,6 @@ public class Player {
     private Pet pet;
     private String currentJob;
     private List<Item> inventory;
-    private Map<String, Integer> relationships;
     private int streak = 0;
 
     public Player(String name, String color) {
@@ -30,7 +29,6 @@ public class Player {
         this.inventory = new ArrayList<>();
         inventory.add(new Item("Apple", "", 10, "food", 15));
         inventory.add(new Item("Banana", "", 12, "food", 17));
-        this.relationships = new HashMap<>();
     }
 
     public Player(String name, String color, Pet pet) {
@@ -46,7 +44,6 @@ public class Player {
         this.inventory = new ArrayList<>();
         inventory.add(new Item("Apple", "", 10, "food", 30));
         inventory.add(new Item("Banana", "", 12, "food", 35));
-        this.relationships = new HashMap<>();
     }
 
     public void update() {
