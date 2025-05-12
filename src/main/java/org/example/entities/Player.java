@@ -1,19 +1,20 @@
 package org.example.entities;
 
+import org.example.frames.Color;
 import org.example.gameManagment.Item;
+import org.example.gameManagment.Job;
 
 import java.util.*;
 
 public class Player {
-    private String name;
-    private String color;
+    private final String name;
+    private final String color;
     private int hunger;
     private int energy;
     private int hygiene;
     private int coins;
-    private Random rand;
     private Pet pet;
-    private String currentJob;
+    private Job job;
     private List<Item> inventory;
     private int streak = 0;
 
@@ -24,8 +25,7 @@ public class Player {
         this.energy = 100;
         this.hygiene = 100;
         this.coins = 50;
-        this.rand = new Random();
-        this.currentJob = "Jobless";
+        this.job = new Job();
         this.inventory = new ArrayList<>();
         inventory.add(new Item("Apple", "", 10, "food", 15));
         inventory.add(new Item("Banana", "", 12, "food", 17));
@@ -39,8 +39,7 @@ public class Player {
         this.energy = 100;
         this.hygiene = 100;
         this.coins = 50;
-        this.rand = new Random();
-        this.currentJob = "Jobless";
+        this.job = new Job();
         this.inventory = new ArrayList<>();
         inventory.add(new Item("Apple", "", 10, "food", 30));
         inventory.add(new Item("Banana", "", 12, "food", 35));
@@ -66,13 +65,12 @@ public class Player {
 
     public String getStatus() {
         return String.format(
-                "%s\nHunger: %d/100\nEnergy: %d/100\nHygiene: %d/100\nCoins: %d\nJob: %s",
+                "%s\n" + Color.RED + "Hunger:" + Color.RESET + " %d/100 | " + Color.GREEN + "Energy:" + Color.RESET + " %d/100 | " + Color.BLUE + "Hygiene:" + Color.RESET + " %d/100\n" + Color.YELLOW + "Coins: %d" + Color.RESET,
                 name,
                 hunger,
                 energy,
                 hygiene,
-                coins,
-                currentJob
+                coins
         );
     }
 

@@ -14,26 +14,20 @@ import static org.example.frames.Color.*;
 public class Main {
     public static void main(String[] args) {
         GameManager gameManager = new GameManager();
-        //gameManager.startMenu();
+        gameManager.startMenu();
 
         // TEST FRAME
-        NPC npcTest = new NPC("Kacper", "xd");
+        //NPC npcTest = new NPC("Kacper", "xd");
 
-        Item telewizor = new Item("tv", "xd", 100, "furniture", 15);
-        Item wanna = new Item("bath", "xd", 100, "furniture", 20);
-        Item kuchenka = new Item("oven", "xd", 100, "furniture", 20);
+        //Item telewizor = new Item("tv", "xd", 100, "furniture", 15);
+        //Item wanna = new Item("bath", "xd", 100, "furniture", 20);
+        //Item kuchenka = new Item("oven", "xd", 100, "furniture", 20);
 
-        Frame frame = new Frame();
+        //Frame.setPlayerColor(RED);
+        //Frame.setNPC(npcTest);
 
-        // w ten sposób coinflipa wstawić nie usuwaj ok?
-        //Set<String> coinSides = new HashSet<>(Set.of("heads", "tails"));
-        //frame.printCoinFlip(InputValidator.getStringInput("Enter coin side: ", coinSides));
-
-        frame.setPlayerColor(RED);
-        frame.setNPC(npcTest);
-
-        //frame.printPark();
-        frame.printShop();
-        //frame.printLogo();
+        //Frame.printPark();
+        //Frame.printShop();
+        //Frame.printLogo();
     }
 }
