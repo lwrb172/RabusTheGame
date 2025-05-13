@@ -2,7 +2,7 @@ package org.example.entities;
 
 import org.example.frames.Color;
 import org.example.gameManagment.Item;
-import org.example.gameManagment.Job;
+import org.example.gameManagment.job.Job;
 
 import java.util.*;
 

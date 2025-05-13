@@ -1,4 +1,6 @@
-package org.example.gameManagment;
+package org.example.gameManagment.job;
+
+import org.example.gameManagment.InputValidator;
 
 public class Job {
     private String jobName;
@@ -45,6 +47,8 @@ public class Job {
 
     public void startGlovo() { // snake
         // gracz zbiera zamowienia, im wiecej zbierze tym wiecej zarobi, odejmowanie energii
+        Snake snake = new Snake();
+        snake.start();
     }
 
     public void startStrawberries() { // tic tac toe
