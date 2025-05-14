@@ -7,12 +7,12 @@ import org.example.gameManagment.UserInterface;
 import java.util.Random;
 
 public class Frame {
-    private final String[] coinFlip = { // dodać kolor żółty
-            Color.YELLOW + "  .------.\n" + Color.RESET + // 1
+    private static final String[] coinFlip = {
+            Color.YELLOW + "  .-----.\n" + Color.RESET + // 1
             Color.YELLOW + " /  ★ ★  \\\n" + Color.RESET +
             Color.YELLOW + "|  ★ $ ★  |\n" + Color.RESET +
             Color.YELLOW + " \\  ★ ★  /\n" + Color.RESET +
-            Color.YELLOW + "  '------'" + Color.RESET,
+            Color.YELLOW + "  '-----'" + Color.RESET,
             Color.YELLOW + "   .---.  \n" + Color.RESET + // 2
             Color.YELLOW +  "  (  $  )  \n" + Color.RESET +
             Color.YELLOW + "   '---'  \n\n\n" + Color.RESET,
@@ -22,135 +22,153 @@ public class Frame {
             Color.YELLOW +  "   .---.  \n" + Color.RESET + // 2
             Color.YELLOW + "  (  $  )  \n" + Color.RESET +
             Color.YELLOW +   "   '---'  \n\n\n" + Color.RESET,
-            Color.YELLOW +   "  .------.\n" + Color.RESET + // 5
+            Color.YELLOW +   "  .-----.\n" + Color.RESET + // 5
             Color.YELLOW +   " /  ★ ★  \\\n" + Color.RESET +
             Color.YELLOW +    "|  ★ $ ★  |\n" + Color.RESET +
             Color.YELLOW +   " \\  ★ ★  /\n" + Color.RESET +
-            Color.YELLOW +   "  '------'" + Color.RESET
+            Color.YELLOW +   "  '-----'" + Color.RESET
     };
 
-    private final String[] tv = {
+    public static final String[] CARD_FRAME = {
+            " _____ ",
+            "|     |",
+            "|     |",
+            "|     |",
+            "|     |",
+            "|_____|"
+    };
+
+    public static final String[] CARD_PATTERNS = {
+            "\n●",
+            "● \n\n ●",
+            "●\n ●\n ●",
+            "● ●\n\n ● ●",
+            "●\n ● ●\n ● ● ",
+            "● ● ●\n\n ● ● ●",
+    };
+
+    private static final String[] tv = {
             " _____ ",
             "| ▒▒▒ |",
             "|_____|",
             Color.BROWN + "/     \\" + Color.RESET
     };
 
-    private final String[] dresser = {
+    private static final String[] dresser = {
             Color.BROWN + "┌─────┐" + Color.RESET,
             Color.BROWN + "│▒▒▒▒▒│" + Color.RESET,
             Color.BROWN + "├─────┤" + Color.RESET,
             Color.BROWN + "│▒▒▒▒▒│" + Color.RESET
     };
 
-    private final String[] table = {
+    private static final String[] table = {
             "       ",
             "       ",
             Color.BROWN + "╔═════╗" + Color.RESET,
             Color.BROWN + "  ║ ║  " + Color.RESET
     };
 
-    private final String[] sofa = {
+    private static final String[] sofa = {
             "       ",
             Color.RED + " (   ) " + Color.RESET,
             Color.RED + "(-----)" + Color.RESET,
             Color.RED + "|-----|" + Color.RESET
     };
 
-    private final String[] toilet = {
+    private static final String[] toilet = {
             " __    ",
             " ||    ",
             " (----)",
             " /    \\"
     };
 
-    private final String[] shower = {
+    private static final String[] shower = {
             " ----- ",
             "| | | |",
             "| | | |",
             " _____ "
     };
 
-    private final String[] bath = {
+    private static final String[] bath = {
             "       ",
             "       ",
             Color.BLUE + "(~~~~~)" + Color.RESET,
             "|_____|"
     };
 
-    private final String[] fridge = {
+    private static final String[] fridge = {
             "  ___  ",
             " |*  | ",
             " |   | ",
             " |___| "
     };
 
-    private final String[] oven = {
+    private static final String[] oven = {
             "       ",
             " _-_-_ ",
             "|** **|",
             "(_____)"
     };
 
-    private final String[] rabus = {
+    private static final String[] rabus = {
             Color.GRAY + "  O  " + Color.RESET,
             Color.GRAY + " \\|/" + Color.RESET,
             Color.GRAY + " / \\" + Color.RESET
     };
 
-    private final String[] npc1 = {
+    private static final String[] npc1 = {
             Color.YELLOW + "  O  " + Color.RESET,
             Color.YELLOW + " /|\\" + Color.RESET,
             Color.YELLOW + " / \\" + Color.RESET
     };
 
-    private final String[] npc2 = {
+    private static final String[] npc2 = {
             Color.RED + "  O  " + Color.RESET,
             Color.RED + " /|\\" + Color.RESET,
             Color.RED + " / \\" + Color.RESET
     };
 
-    private String[] playerBody = {
+    private static String[] playerBody = {
             "     ",
             "    ",
             "    "
     };
 
-    private String[] npcBody = {
+    private static String[] npcBody = {
             "     ",
             "    ",
             "    "
     };
 
-    private String[] itemMainRoom = {
+    private static String[] itemMainRoom = {
             "       ",
             "       ",
             "       ",
             "       "
     };
 
-    private String[] itemBathoom = {
+    private static String[] itemBathoom = {
             "       ",
             "       ",
             "       ",
             "       "
     };
 
-    private String[] itemKitchen = {
+    private static String[] itemKitchen = {
             "       ",
             "       ",
             "       ",
             "       "
     };
 
-    public void printCoinFlip(String choice) { // dorobic if win if lose
+    public static void printCoinFlip(String choice) { //todo przeniesc funkcjonalnosc do eventa
         String[] sides = {"HEADS", "TAILS"};
         Random rand = new Random();
 
-        System.out.println("I'm throwing coin...");
-        System.out.println();
+        UserInterface.clearScreen();
+        System.out.print("I'm throwing coin...");
         try {
-            Thread.sleep(1500);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             System.err.println(e.getMessage());
         }
@@ -165,17 +183,37 @@ public class Frame {
             result = side;
             i++;
             try {
-                Thread.sleep(1500);
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 System.err.println(e.getMessage());
             }
         }
         System.out.print("\r" + "Result: " + result + "       \n");
+
+        if(result.toLowerCase().equals(choice)) {
+            UserInterface.clearScreen();
+            System.out.print("I'm letting you go... this time.");
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                System.err.println(e.getMessage());
+            }
+            //score.addRabusStreak();
+        } else {
+            UserInterface.clearScreen();
+            System.out.print("Too bad, you lose ;)");
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                System.err.println(e.getMessage());
+            }
+            // TO-DO lose
+        }
     }
 
-    public void printPlayer() { System.out.print(playerBody[0] + '\n' + playerBody[1] + '\n' + playerBody[2] + '\n'); }
+    public static void printPlayer() { System.out.print(playerBody[0] + '\n' + playerBody[1] + '\n' + playerBody[2] + '\n'); }
 
-    public void printMainRoom() {
+    public static void printMainRoom() {
         System.out.println(Color.RED + "\n ----------------------------------------------------------" + Color.RESET);
         System.out.println(Color.RED + "/                                                          \\" + Color.RESET);
         System.out.println(Color.RED + "------------------------------------------------------------" + Color.RESET);
@@ -192,7 +230,7 @@ public class Frame {
         System.out.println("\n------------------------------------------------------------");
     }
 
-    public void printBathroom() {
+    public static void printBathroom() {
         System.out.println(Color.RED + "\n ----------------------------------------------------------" + Color.RESET);
         System.out.println(Color.RED + "/                                                          \\" + Color.RESET);
         System.out.println(Color.RED + "------------------------------------------------------------" + Color.RESET);
@@ -209,7 +247,7 @@ public class Frame {
         System.out.println("\n------------------------------------------------------------");
     }
 
-    public void printKitchen() {
+    public static void printKitchen() {
         System.out.println(Color.RED + "\n ----------------------------------------------------------" + Color.RESET);
         System.out.println(Color.RED + "/                                                          \\" + Color.RESET);
         System.out.println(Color.RED + "------------------------------------------------------------" + Color.RESET);
@@ -226,7 +264,7 @@ public class Frame {
         System.out.println("\n------------------------------------------------------------");
     }
 
-    public void printPark() {
+    public static void printPark() {
         System.out.printf(
                 "\n                                          " + Color.BROWN + "v .   ._, |_  .,        \n" +
                 "     " + Color.GREEN + "ccee88oo" + Color.RESET + "                          " + Color.BROWN + "`-._\\/  .  \\ /    |/_      \n" + Color.RESET +
@@ -246,45 +284,53 @@ public class Frame {
         System.out.println(Color.GREEN + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" + Color.RESET);
     }
 
-    public void printShop() {
+    public static void printShop() {
         System.out.println(
-                Color.BROWN + "\n       ║ ║             ║ ║         \n" +
-                Color.BROWN + "       ║ ║             ║ ║         \n" +
-                Color.BROWN + "  _____________________________\n" +
-                Color.BROWN + " /                             \\\n" +
-                Color.BROWN + "|     " + Color.RESET + "_____ _                   " + Color.BROWN + "|\n" + Color.RESET +
+                Color.BROWN + "\n       ║ ║             ║ ║         \n" + Color.RESET +
+                Color.BROWN + "       ║ ║             ║ ║         \n" + Color.RESET +
+                Color.BROWN + "  _____________________________\n" + Color.RESET +
+                Color.BROWN + " /     " + Color.RESET + "_____ _                 " + Color.BROWN + "\\\n" + Color.RESET +
                 Color.BROWN + "|    " + Color.RESET + "/ ____| |                  " + Color.BROWN + "|\n" + Color.RESET +
                 Color.BROWN + "|   " + Color.RESET + "| (___ | |__   ___  _ __    " + Color.BROWN + "|\n" + Color.RESET +
                 Color.BROWN + "|    " + Color.RESET + "\\___ \\| '_ \\ / _ \\| '_ \\   " + Color.BROWN + "|\n" + Color.RESET +
                 Color.BROWN + "|    " + Color.RESET + "____) | | | | (_) | |_) |  " + Color.BROWN + "|\n" + Color.RESET +
                 Color.BROWN + "|   " + Color.RESET + "|_____/|_| |_|\\___/| .__/   " + Color.BROWN + "|\n" + Color.RESET +
-                Color.BROWN + "|                      " + Color.RESET + "| |      " + Color.BROWN + "|\n" + Color.RESET +
                 Color.BROWN + "|                      " + Color.RESET + "|_|      " + Color.BROWN + "|\n" + Color.RESET +
                 Color.BROWN + " \\_____________________________/\n" + Color.RESET
         );
     }
 
-    public void setPlayerColor(Color color) {
+    public static void printLogo() {
+        System.out.println(
+                Color.CYAN + "\n ______   ______   ______   __  __   ______       ______  __  __   ______       ______   ______   __    __   ______  \n" + Color.RESET +
+                Color.CYAN + "/\\  == \\ /\\  __ \\ /\\  == \\ /\\ \\/\\ \\ /\\  ___\\     /\\__  _\\/\\ \\_\\ \\ /\\  ___\\     /\\  ___\\ /\\  __ \\ /\\ \"-./  \\ /\\  ___\\  \n" + Color.RESET +
+                Color.CYAN + "\\ \\  __< \\ \\  __ \\\\ \\  __< \\ \\ \\_\\ \\\\ \\___  \\    \\/_/\\ \\/\\ \\  __ \\\\ \\  __\\     \\ \\ \\__ \\\\ \\  __ \\\\ \\ \\-./\\ \\\\ \\  __\\  \n" + Color.RESET +
+                Color.CYAN + " \\ \\_\\ \\_\\\\ \\_\\ \\_\\\\ \\_____\\\\ \\_____\\\\/\\_____\\      \\ \\_\\ \\ \\_\\ \\_\\\\ \\_____\\    \\ \\_____\\\\ \\_\\ \\_\\\\ \\_\\ \\ \\_\\\\ \\_____\\ \n" + Color.RESET +
+                Color.CYAN + "  \\/_/ /_/ \\/_/\\/_/ \\/_____/ \\/_____/ \\/_____/       \\/_/  \\/_/\\/_/ \\/_____/     \\/_____/ \\/_/\\/_/ \\/_/  \\/_/ \\/_____/ " + Color.RESET
+        );
+    }
+
+    public static void setPlayerColor(Color color) {
         playerBody[0] = color + "  O  " + Color.RESET;
         playerBody[1] = color + " /|\\" + Color.RESET;
         playerBody[2] = color + " / \\" + Color.RESET;
     }
 
-    public void setNPC(NPC npc) {
+    public static void setNPC(NPC npc) {
         switch (npc.getName()) {
             case "Rabuś" -> {
                 insert(rabus, npcBody);
             }
-            case "npc1" -> { // do ustalenia
+            case "Kacper" -> {
                 insert(npc1, npcBody);
             }
-            case "npc2" -> { // też do ustalenia
+            case "Oliwier" -> {
                 insert(npc2, npcBody);
             }
         }
     }
 
-    public void setItemMainRoom(Item item) {
+    public static void setItemMainRoom(Item item) {
         switch (item.getName()) {
             case "tv" -> {
                 insert(tv, itemMainRoom);
@@ -301,7 +347,7 @@ public class Frame {
         }
     }
 
-    public void setItemBathroom(Item item) {
+    public static void setItemBathroom(Item item) {
         switch (item.getName()) {
             case "toilet" -> {
                 insert(toilet, itemBathoom);
@@ -315,7 +361,7 @@ public class Frame {
         }
     }
 
-    public void setItemKitchen(Item item) {
+    public static void setItemKitchen(Item item) {
         switch (item.getName()) {
             case "fridge" -> {
                 insert(fridge, itemKitchen);
@@ -329,7 +375,7 @@ public class Frame {
         }
     }
 
-    private void insert(String[] from, String[] to) {
+    private static void insert(String[] from, String[] to) {
         for (int i = 0; i < from.length && i < to.length; i++) {
             to[i] = from[i];
         }

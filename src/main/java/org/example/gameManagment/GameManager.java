@@ -3,6 +3,7 @@ package org.example.gameManagment;
 import org.example.actions.Action;
 import org.example.entities.Pet;
 import org.example.entities.Player;
+import org.example.frames.Frame;
 
 import java.util.*;
 
@@ -12,20 +13,18 @@ public class GameManager {
     private final TimeManager time;
     private boolean isRunning = false;
     private final Scanner scanner;
-    private final UserInterface ui;
     private List<Action> actions;
 
     public GameManager() {
         this.world = new World();
         this.time = new TimeManager();
-        this.ui = new UserInterface();
         this.actions = new ArrayList<>();
         this.scanner = new Scanner(System.in);
     }
 
     public void startMenu() {
-        System.out.println("\n=== RABUŚ THE GAME ===");
-        int choice = InputValidator.getIntInput("1. Create Character\n2. Exit", 1, 2);
+        Frame.printLogo();
+        int choice = InputValidator.getIntInput("\n1. Create Character\n\n2. Exit\n\n>> ", 1, 2);
         switch (choice) {
             case 1:
                 createCharacter();
@@ -80,11 +79,16 @@ public class GameManager {
     }
 
     private void renderUI() {
-        //ui.clearScreen();
-        ui.showMessage("\n--- " + time.getFormattedTime() + " ---");
-        ui.displayLocationInfo(world.getCurrentLocation());
-        ui.showMessage(player.getStatus());
-        ui.showMessage("Available locations:");
+        UserInterface.clearScreen();
+        UserInterface.showMessage("\n--- " + time.getFormattedTime() + " ---");
+
+        Frame.printMainRoom();
+
+        UserInterface.displayLocationInfo(world.getCurrentLocation());
+        System.out.println();
+        UserInterface.showMessage(player.getStatus());
+        System.out.println();
+        UserInterface.showMessage("Available locations:");
         List<Location> locations = world.getAllLocations();
         for (Location location : locations) {
             System.out.print(location.getName() + ' ');
@@ -93,12 +97,14 @@ public class GameManager {
         // show NPC
 
         actions = world.getCurrentLocation().getActions();
-        ui.showMessage("Actions:");
+
+        System.out.println();
+        UserInterface.showMessage("Actions:");
         for (int i = 0; i < actions.size(); i++) {
             Action action = actions.get(i);
-            ui.showMessage((i+1) + ". " + action.getName() + " (" + action.getDescription() + ")");
+            UserInterface.showMessage((i+1) + ". " + action.getName() + " (" + action.getDescription() + ")");
         }
-        ui.showMessage("Enter action number or location name:");
+        UserInterface.showMessage("\nEnter action number or location name:");
     }
 
     private void mainGameInput() {

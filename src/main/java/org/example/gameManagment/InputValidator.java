@@ -8,7 +8,7 @@ public class InputValidator {
 
     public static int getIntInput(String prompt, int min, int max) {
         while (true) {
-            System.out.println(prompt);
+            System.out.print(prompt);
             try {
                 int value = Integer.parseInt(scanner.nextLine().trim());
                 if (value >= min && value <= max) {
@@ -16,6 +16,7 @@ public class InputValidator {
                 }
                 System.out.printf("Choose number between %d and %d!\n", min, max);
             } catch (NumberFormatException e) {
+                UserInterface.clearScreen();
                 System.out.println("It has to be a number!");
             }
         }
@@ -28,7 +29,7 @@ public class InputValidator {
             if (validOptions.contains(input)) {
                 return input;
             }
-            System.out.println("Invalid command. Correct options: " + validOptions);
+            System.out.println("\nInvalid command. Correct options: " + validOptions);
         }
     }
 
@@ -39,7 +40,7 @@ public class InputValidator {
             if (!input.isEmpty()) {
                 return input;
             }
-            System.out.println("String must not be empty!");
+            System.out.println("\nString must not be empty!");
         }
     }
 }
