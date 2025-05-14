@@ -32,31 +32,17 @@ public class Job {
     public void startJob(String job) {
         switch (job) {
             case "glovo":
-                startGlovo();
+                new Memory().start();
                 break;
             case "strawberry man":
-                startStrawberries();
+                //todo
                 break;
             case "parliamentary representative":
-                startParliamentaryRepresentative();
+                //todo
                 break;
             default:
                 System.out.println("Choose your job first!\n");
         }
-    }
-
-    public void startGlovo() { // snake
-        // gracz zbiera zamowienia, im wiecej zbierze tym wiecej zarobi, odejmowanie energii
-        Snake snake = new Snake();
-        snake.start();
-    }
-
-    public void startStrawberries() { // tic tac toe
-        // kolko krzyzyk z komputerem, gracz gra truskawkami, gra do 3 winow, kasa, odejmowanie energii
-    }
-
-    public void startParliamentaryRepresentative() { // fast typing
-        // odliczanie 3 2 1, na górze wyświetla sie fragment konstytucji, podspodem go piszesz, odmierzanie czasu, im szybciej napiszesz tym wiecej kasy, odejmowanie energii
     }
 
     public String getJobName() { return jobName; }

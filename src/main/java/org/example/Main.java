@@ -5,7 +5,8 @@ import org.example.frames.Frame;
 import org.example.gameManagment.GameManager;
 import org.example.gameManagment.InputValidator;
 import org.example.gameManagment.Item;
-import org.example.gameManagment.job.Snake;
+import org.example.gameManagment.job.Memory;
+import org.example.gameManagment.job.TicTacToe;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,8 +15,7 @@ import static org.example.frames.Color.*;
 
 public class Main {
     public static void main(String[] args) {
-        GameManager gameManager = new GameManager();
-        //gameManager.startMenu();
+        //new GameManager().startMenu();
 
         // TEST FRAME
         //NPC npcTest = new NPC("Kacper", "xd");
@@ -32,8 +32,7 @@ public class Main {
         //Frame.printLogo();
 
         // TEST JOB
-
-        Snake snake = new Snake();
-        snake.start();
+        //new Memory().start();
+        new TicTacToe().startTTT();
     }
 }

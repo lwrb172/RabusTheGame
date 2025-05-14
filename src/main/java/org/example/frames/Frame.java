@@ -29,6 +29,24 @@ public class Frame {
             Color.YELLOW +   "  '-----'" + Color.RESET
     };
 
+    public static final String[] CARD_FRAME = {
+            " _____ ",
+            "|     |",
+            "|     |",
+            "|     |",
+            "|     |",
+            "|_____|"
+    };
+
+    public static final String[] CARD_PATTERNS = {
+            "\n●",
+            "● \n\n ●",
+            "●\n ●\n ●",
+            "● ●\n\n ● ●",
+            "●\n ● ●\n ● ● ",
+            "● ● ●\n\n ● ● ●",
+    };
+
     private static final String[] tv = {
             " _____ ",
             "| ▒▒▒ |",
@@ -143,7 +161,7 @@ public class Frame {
             "       "
     };
 
-    public static void printCoinFlip(String choice) {
+    public static void printCoinFlip(String choice) { //todo przeniesc funkcjonalnosc do eventa
         String[] sides = {"HEADS", "TAILS"};
         Random rand = new Random();
 
@@ -180,7 +198,7 @@ public class Frame {
             } catch (InterruptedException e) {
                 System.err.println(e.getMessage());
             }
-            // TO-DO win
+            //score.addRabusStreak();
         } else {
             UserInterface.clearScreen();
             System.out.print("Too bad, you lose ;)");
