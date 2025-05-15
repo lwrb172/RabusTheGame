@@ -21,12 +21,12 @@ public class Main {
 
         Frame frame = new Frame();
 
-        // input validator HEADS TAILS
-        //frame.printCoinFlip("heads");
+         //input validator HEADS TAILS
+        frame.printCoinFlip("heads");
 
-        frame.setPlayerColor(RED);
-        frame.setNPC(npcTest);
-
-        frame.printShop();
+//        frame.setPlayerColor(RED);
+//        frame.setNPC(npcTest);
+//
+//        frame.printShop();
     }
 }

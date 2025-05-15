@@ -37,6 +37,7 @@ public class World {
         home.addAction(new SleepAction());
         home.addAction(new EatAction());
         home.addAction(new WorkAction());
+        home.addAction(new TalkAction());
         shop.addAction(new BuyAction());
 
         NPC helper = new NPC("helper", "This is a NPC. He will guide you and provide help trough your adventures.");

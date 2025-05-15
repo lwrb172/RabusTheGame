@@ -140,4 +140,8 @@ public class Player {
     public void setEnergy(int energy) {
         this.energy = energy;
     }
+
+    public Object getPet() {
+        return null;
+    }
 }

@@ -18,15 +18,15 @@ public class NPC {
         this.spawnTimes = new HashMap<>();
     }
 
-    private void initDialogues() {
+    public void initDialogues() {
         dialogues.put("greeting", "Hi, how it's going?");
         dialogues.put("work", "I should go to work");
         dialogues.put("angry", "Leave me alone!");
     }
 
-    private void initSpawnTimes(int hour, String locationName) {
-        spawnTimes.put(hour, locationName);
-    }
+//    public void initSpawnTimes(int hour, String locationName) {
+//        spawnTimes.put(hour, locationName);
+//    }
 
     public String interact(String interactionType) {
         switch (interactionType.toLowerCase()) {
