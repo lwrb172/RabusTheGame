@@ -1,12 +1,16 @@
 package org.example.events;
 
 import org.example.entities.Player;
+import org.example.frames.Frame;
+import org.example.gameManagment.InputValidator;
 import org.example.gameManagment.TimeManager;
 
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class RobberyEvent extends Event {
-    private Random rand = new Random();
+    Random rand = new Random();
 
     public RobberyEvent() {
         this.name = "Rabuś!";
@@ -15,21 +19,13 @@ public class RobberyEvent extends Event {
 
     @Override
     public boolean timeTrigger(TimeManager time) {
-        return rand.nextInt(100) < 30;
+        return rand.nextInt(100) < 0;
     }
 
     @Override
     public void trigger(Player player) {
-        System.out.println("Wild Rabuś appears! Let's flip a coin (heads - win, tails - you lose half your money");
-        boolean win = rand.nextBoolean();
-
-        if (win) {
-            System.out.println("You won! Rabuś is running away");
-            player.incrementStreak();
-        } else {
-            int lost = player.getCoins();
-            player.loseCoins(lost);
-            System.out.println("You lost " + lost + " coins");
-        }
+        System.out.println("Hands up, this is a robbery! Call it right and I might let you go...");
+        Set<String> coinSides = new HashSet<>(Set.of("heads", "tails"));
+        Frame.printCoinFlip(InputValidator.getStringInput("Enter coin side: ", coinSides));
     }
 }
