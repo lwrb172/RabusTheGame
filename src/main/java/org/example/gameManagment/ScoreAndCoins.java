@@ -34,12 +34,18 @@ public class ScoreAndCoins {
             x = 100;
             y = random.nextInt(10, 50);
         }
+        UserInterface.clearScreen();
         playerScore += x;
         playerCoins += y;
-        System.out.println("You got " + x + " points!\nYou got " + Color.YELLOW + y + Color.RESET + " coins!");
+        System.out.println("You got " + Color.CYAN + x + Color.RESET + " points!\nYou got " + Color.YELLOW + y + Color.RESET + " coins!");
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
-    public void addScoreCoinsTTT(int whoWon, int compScore) {
+    public void addScoreCoinsTicTacToe(int whoWon, int compScore) {
         int x;
         int y;
         switch (whoWon) {
@@ -64,9 +70,15 @@ public class ScoreAndCoins {
                 y = random.nextInt(100, 200);
                 break;
         }
+        UserInterface.clearScreen();
         playerScore += x;
         playerCoins += y;
-        System.out.println("You got " + x + " points!\nYou got " + Color.YELLOW + y + Color.RESET + " coins!");
+        System.out.println("You got " + Color.CYAN + x + Color.RESET + " points!\nYou got " + Color.YELLOW + y + Color.RESET + " coins!");
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     public void addRabusStreak() { playerRabusStreak++; }

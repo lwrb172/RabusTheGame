@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.entities.NPC;
+import org.example.entities.Player;
 import org.example.frames.Frame;
 import org.example.gameManagment.GameManager;
 import org.example.gameManagment.InputValidator;
@@ -33,6 +34,8 @@ public class Main {
 
         // TEST JOB
         //new Memory().start();
-        new TicTacToe().startTTT();
+        Player player = new Player("Kacper", "green");
+        new TicTacToe(player.getName()).start();
+        //new Memory().start();
     }
 }

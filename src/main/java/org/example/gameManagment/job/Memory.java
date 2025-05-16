@@ -107,6 +107,11 @@ public class Memory {
             }
         }
         System.out.println("Score: " + Color.GREEN + gameScore + Color.RESET +" | Mistakes: " + Color.RED + mistakes + Color.RESET);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     private String generateCard(int value, boolean isRevealed) {
