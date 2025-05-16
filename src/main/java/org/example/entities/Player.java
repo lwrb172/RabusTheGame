@@ -25,7 +25,7 @@ public class Player {
         this.energy = 100;
         this.hygiene = 100;
         this.coins = 50;
-        this.job = new Job();
+        this.job = new Job(getName());
         this.inventory = new ArrayList<>();
         inventory.add(new Item("Apple", "", 10, "food", 15));
         inventory.add(new Item("Banana", "", 12, "food", 17));
@@ -39,7 +39,7 @@ public class Player {
         this.energy = 100;
         this.hygiene = 100;
         this.coins = 50;
-        this.job = new Job();
+        this.job = new Job(getName());
         this.inventory = new ArrayList<>();
         inventory.add(new Item("Apple", "", 10, "food", 30));
         inventory.add(new Item("Banana", "", 12, "food", 35));

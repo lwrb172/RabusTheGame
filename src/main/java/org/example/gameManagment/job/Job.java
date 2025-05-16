@@ -1,11 +1,14 @@
 package org.example.gameManagment.job;
 
+import org.example.entities.Player;
 import org.example.gameManagment.InputValidator;
 
 public class Job {
     private String jobName;
+    private final String playerName;
 
-    public Job() {
+    public Job(String playerName) {
+        this.playerName = playerName;
         this.jobName = "jobless";
     }
 
@@ -35,7 +38,7 @@ public class Job {
                 new Memory().start();
                 break;
             case "strawberry man":
-                //todo
+                new TicTacToe(playerName).start();
                 break;
             case "parliamentary representative":
                 //todo

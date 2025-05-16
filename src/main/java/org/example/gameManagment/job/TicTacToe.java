@@ -1,7 +1,10 @@
 package org.example.gameManagment.job;
 
+import org.example.entities.Player;
+import org.example.frames.Color;
 import org.example.gameManagment.InputValidator;
 import org.example.gameManagment.ScoreAndCoins;
+import org.example.gameManagment.UserInterface;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -9,48 +12,81 @@ import java.util.Random;
 public class TicTacToe {
     private final int[] gameScores = new int[3]; // player, comp, draw
     private final int[] board = new int[9];
+    private final String playerName;
     Random random = new Random();
     ScoreAndCoins score = new ScoreAndCoins();
 
-    public void startTTT() {
+    public TicTacToe(String playerName) {
+        this.playerName = playerName;
+    }
+
+    public void start() {
         while (true) {
             compMove();
+            if (analyzeGame()) {
+                if (checkGameEnd()) break;
+                continue;
+            }
+
             printBoard();
             playerMove();
-            analyzeGame();
-            for (int i = 0; i < 3; i++) {
-                if (gameScores[i] == 3) {
-                    score.addScoreCoinsTTT(i, gameScores[1]);
-                    break;
-                }
+            if (analyzeGame()) {
+                if (checkGameEnd()) break;
             }
         }
+    }
+
+    private boolean checkGameEnd() {
+        for (int i = 0; i < 3; i++) {
+            if (gameScores[i] == 3) {
+                UserInterface.clearScreen();
+                score.addScoreCoinsTicTacToe(i, gameScores[1]);
+                return true;
+            }
+        }
+        return false;
     }
 
     private void printBoard() {
+        UserInterface.clearScreen();
         System.out.println("\n-------------");
-        for (int i = 0; i < 9; i++) {
-            if (i % 3 == 0 && i != 0) {
-                System.out.println("\n-------------");
-            }
-
+        for (int row = 0; row < 3; row++) {
             System.out.print("| ");
-            switch (board[i]) {
-                case 1 -> System.out.print("X ");
-                case -1 -> System.out.print("O ");
-                default -> System.out.print("  ");
+            for (int col = 0; col < 3; col++) {
+                int index = row * 3 + col;
+                switch (board[index]) {
+                    case 1 -> System.out.print("X | ");
+                    case -1 -> System.out.print("O | ");
+                    default -> System.out.print("  | ");
+                }
             }
+            System.out.println("\n-------------");
         }
-        System.out.println("|\n-------------");
-    }
-
-    private void analyzeGame() {
-        checkPlayer();
-        checkComp();
-        checkDraw();
     }
 
     private void compMove() {
+        // Najpierw sprawdź czy komputer może wygrać
+        for (int i = 0; i < 9; i++) {
+            if (board[i] == 0) {
+                board[i] = -1;
+                if (checkWin(-1)) return; // Znalazł ruch wygrywający
+                board[i] = 0;
+            }
+        }
+
+        // Jeśli nie, zablokuj gracza jeśli może wygrać
+        for (int i = 0; i < 9; i++) {
+            if (board[i] == 0) {
+                board[i] = 1;
+                if (checkWin(1)) {
+                    board[i] = -1; // Zablokuj
+                    return;
+                }
+                board[i] = 0;
+            }
+        }
+
+        // W przeciwnym razie losowy ruch
         int compChoice;
         do {
             compChoice = random.nextInt(9);
@@ -67,100 +103,66 @@ public class TicTacToe {
         board[playerChoice - 1] = 1;
     }
 
-    private void checkPlayer() {
-        // horizontal
-        if (board[0] == 1 && board[1] == 1 && board[2] == 1) {
-            gameScores[0]++;
-            Arrays.fill(board, 0);
-            return;
-        } else if (board[3] == 1 && board[4] == 1 && board[5] == 1) {
-            gameScores[0]++;
-            Arrays.fill(board, 0);
-            return;
-        } else if (board[6] == 1 && board[7] == 1 && board[8] == 1) {
-            gameScores[0]++;
-            Arrays.fill(board, 0);
-            return;
-        }
-
-        // vertical
-        if (board[0] == 1 && board[3] == 1 && board[6] == 1) {
-            gameScores[0]++;
-            Arrays.fill(board, 0);
-            return;
-        } else if (board[1] == 1 && board[4] == 1 && board[7] == 1) {
-            gameScores[0]++;
-            Arrays.fill(board, 0);
-            return;
-        } else if (board[2] == 1 && board[5] == 1 && board[8] == 1) {
-            gameScores[0]++;
-            Arrays.fill(board, 0);
-            return;
-        }
-
-        // cross
-        if (board[0] == 1 && board[4] == 1 && board[8] == 1) {
-            gameScores[0]++;
-            Arrays.fill(board, 0);
-            return;
-        } else if (board[2] == 1 && board[4] == 1 && board[6] == 1) {
-            gameScores[0]++;
-            Arrays.fill(board, 0);
-            return;
-        }
+    private boolean checkWin(int player) {
+        return (board[0] == player && board[1] == player && board[2] == player) ||
+                (board[3] == player && board[4] == player && board[5] == player) ||
+                (board[6] == player && board[7] == player && board[8] == player) ||
+                (board[0] == player && board[3] == player && board[6] == player) ||
+                (board[1] == player && board[4] == player && board[7] == player) ||
+                (board[2] == player && board[5] == player && board[8] == player) ||
+                (board[0] == player && board[4] == player && board[8] == player) ||
+                (board[2] == player && board[4] == player && board[6] == player);
     }
 
-    private void checkComp() {
-        // horizontal
-        if (board[0] == 1 && board[1] == 1 && board[2] == 1) {
-            gameScores[1]++;
-            Arrays.fill(board, 0);
-            return;
-        } else if (board[3] == 1 && board[4] == 1 && board[5] == 1) {
-            gameScores[1]++;
-            Arrays.fill(board, 0);
-            return;
-        } else if (board[6] == 1 && board[7] == 1 && board[8] == 1) {
-            gameScores[1]++;
-            Arrays.fill(board, 0);
-            return;
+    private boolean analyzeGame() {
+        if (checkWin(1)) {
+            addClearPrint("player", playerName);
+            return true;
+        } else if (checkWin(-1)) {
+            addClearPrint("comp", playerName);
+            return true;
+        } else if (isBoardFull()) {
+            addClearPrint("draw", playerName);
+            return true;
         }
-
-        // vertical
-        if (board[0] == 1 && board[3] == 1 && board[6] == 1) {
-            gameScores[1]++;
-            Arrays.fill(board, 0);
-            return;
-        } else if (board[1] == 1 && board[4] == 1 && board[7] == 1) {
-            gameScores[1]++;
-            Arrays.fill(board, 0);
-            return;
-        } else if (board[2] == 1 && board[5] == 1 && board[8] == 1) {
-            gameScores[1]++;
-            Arrays.fill(board, 0);
-            return;
-        }
-
-        // cross
-        if (board[0] == 1 && board[4] == 1 && board[8] == 1) {
-            gameScores[1]++;
-            Arrays.fill(board, 0);
-            return;
-        } else if (board[2] == 1 && board[4] == 1 && board[6] == 1) {
-            gameScores[1]++;
-            Arrays.fill(board, 0);
-            return;
-        }
+        return false;
     }
 
-    private void checkDraw() {
-        int occupied = 0;
-        for (int i = 0; i < 9; i++) {
-            if (board[i] != 0) occupied++;
+    private boolean isBoardFull() {
+        for (int i : board) {
+            if (i == 0) return false;
         }
-        if (occupied == 9) {
-            gameScores[2]++;
-            Arrays.fill(board, 0);
+        return true;
+    }
+
+    private void addClearPrint(String whoWon, String playerName) {
+        UserInterface.clearScreen();
+
+        printBoard();
+        switch (whoWon) {
+            case "player":
+                gameScores[0]++;
+                System.out.println("You won a round!");
+                break;
+            case "comp":
+                gameScores[1]++;
+                System.out.println("Comp has won a round...");
+                break;
+            case "draw":
+                gameScores[2]++;
+                System.out.println("It's a draw.");
+                break;
+        }
+
+        Arrays.fill(board, 0);
+        System.out.println("Scores:\n   " + playerName + ": " + Color.GREEN + gameScores[0] +
+                Color.RESET + " | Comp: " + Color.RED + gameScores[1] + Color.RESET +" | Draws: "
+                + Color.GRAY + gameScores[2] + Color.RESET);
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            System.err.println(e.getMessage());
         }
     }
 
