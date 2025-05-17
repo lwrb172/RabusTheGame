@@ -4,8 +4,10 @@ import org.example.actions.Action;
 import org.example.entities.Pet;
 import org.example.entities.Player;
 import org.example.frames.Frame;
+import org.example.frames.Color;
 
 import java.util.*;
+import java.util.List;
 
 public class GameManager {
     private Player player;
@@ -14,16 +16,19 @@ public class GameManager {
     private boolean isRunning = false;
     private final Scanner scanner;
     private List<Action> actions;
+    private final Frame frame;
 
     public GameManager() {
         this.world = new World();
         this.time = new TimeManager();
         this.actions = new ArrayList<>();
         this.scanner = new Scanner(System.in);
+        this.frame = new Frame();
     }
 
     public void startMenu() {
-        Frame.printLogo();
+        UserInterface.clearScreen();
+        frame.printLogo();
         int choice = InputValidator.getIntInput("\n1. Create Character\n\n2. Exit\n\n>> ", 1, 2);
         switch (choice) {
             case 1:
@@ -53,28 +58,34 @@ public class GameManager {
                 String petName = InputValidator.getNonEmptyString("Enter pet's name: ");
                 Pet pet = new Pet(petName, petType);
                 this.player = new Player(name, color, pet);
-                System.out.println(player.getName());
-                System.out.println(player.getColor());
-                System.out.println(player.getPetName());
-                System.out.println(player.getPetType());
             } else {
                 this.player = new Player(name, color);
-                System.out.println(player.getName());
-                System.out.println(player.getColor());
             }
         }
+        frame.setPlayerColor(Color.toColor(player.getColor()));
         startGame();
     }
 
     public void startGame() {
         isRunning = true;
         while (isRunning) {
-            time.update();
-            player.update();
-            world.checkEvents(player, time);
+             time.update();
+             player.update();
+             world.checkEvents(player, time);
 
-            renderUI();
-            mainGameInput();
+             if (!player.getGameOver()) {
+                renderUI();
+                mainGameInput();
+             } else {
+                 UserInterface.clearScreen();
+                 System.out.println("Game over");
+                 try {
+                     Thread.sleep(3000);
+                 } catch (InterruptedException e) {
+                     System.err.println(e.getMessage());
+                 }
+                 startMenu();
+             }
         }
     }
 
@@ -82,7 +93,8 @@ public class GameManager {
         UserInterface.clearScreen();
         UserInterface.showMessage("\n--- " + time.getFormattedTime() + " ---");
 
-        Frame.printMainRoom();
+
+        frame.printMainRoom();
 
         UserInterface.displayLocationInfo(world.getCurrentLocation());
         System.out.println();
@@ -108,27 +120,27 @@ public class GameManager {
     }
 
     private void mainGameInput() {
-        String input = scanner.nextLine().toLowerCase();
+            String input = scanner.nextLine().toLowerCase();
 
-        try {
-            int actionIndex = Integer.parseInt(input);
-            actions = world.getCurrentLocation().getActions();
+            try {
+                int actionIndex = Integer.parseInt(input);
+                actions = world.getCurrentLocation().getActions();
 
-            if (actionIndex > 0 && actionIndex <= actions.size()) {
-                actions.get(actionIndex-1).execute(player, time);
-            } else {
-                System.out.println("Invalid action number!");
-            }
-        } catch (NumberFormatException e) {
-            // if not number - check locations
-            if (!world.moveToLocation(input)) {
-                if (input.equals("exit")) {
-                    System.out.println("You left the game.");
-                    isRunning = false;
+                if (actionIndex > 0 && actionIndex <= actions.size()) {
+                    actions.get(actionIndex - 1).execute(player, time);
                 } else {
-                    System.out.println("Invalid command!");
+                    System.out.println("Invalid action number!");
+                }
+            } catch (NumberFormatException e) {
+                // if not number - check locations
+                if (!world.moveToLocation(input)) {
+                    if (input.equals("exit")) {
+                        System.out.println("You left the game.");
+                        isRunning = false;
+                    } else {
+                        System.out.println("Invalid command!");
+                    }
                 }
             }
-        }
     }
 }

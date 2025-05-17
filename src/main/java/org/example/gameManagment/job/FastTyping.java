@@ -11,7 +11,8 @@ import java.util.Scanner;
 
 public class FastTyping {
     private int tries = 3;
-    ScoreAndCoins score = new ScoreAndCoins(); //todo podawany od playera
+    private final ScoreAndCoins playerScoreCoins;
+    Scanner input = new Scanner(System.in);
 
     private final String[] texts = {
         "Rzeczpospolita Polska jest demokratycznym państwem prawnym, urzeczywistniającym zasady sprawiedliwości społecznej.",
@@ -28,9 +29,13 @@ public class FastTyping {
         "Każdy ma prawo do nauki. Nauka do 18. roku życia jest obowiązkowa."
     };
 
+    public FastTyping(ScoreAndCoins playerScoreCoins) {
+        this.playerScoreCoins = playerScoreCoins;
+    }
+
     public void start() {
-        countdown();
-        String text = choosePrintText();
+        String text = chooseText();
+        text = "a";
         waitForInput(text);
     }
 
@@ -47,22 +52,19 @@ public class FastTyping {
         }
     }
 
-    private String choosePrintText() {
-        String text = texts[new Random().nextInt(texts.length)];
-        System.out.println(text);
-        return text;
+    private String chooseText() {
+        return texts[new Random().nextInt(texts.length)];
     }
 
     private void waitForInput(String text) {
-        Scanner input = new Scanner(System.in);
-        String playerInput;
-        Instant start = Instant.now();
-
         if (tries != 0) {
-            playerInput = input.nextLine();
+            countdown();
+            System.out.println(text);
+            Instant start = Instant.now();
+            String playerInput = input.nextLine();
             Instant end = Instant.now();
             Duration duration = Duration.between(start, end);
-            String[] time = {Long.toString(duration.getSeconds()), Long.toString(duration.getSeconds() / 60)};
+            String time = Long.toString(duration.getSeconds());
             checkInputPrint(playerInput, text, time);
         } else {
             UserInterface.clearScreen();
@@ -70,16 +72,16 @@ public class FastTyping {
         }
     }
 
-    private void checkInputPrint(String playerInput, String text, String[] time) {
+    private void checkInputPrint(String playerInput, String text, String time) {
         if (playerInput.equals(text)) {
             UserInterface.clearScreen();
-            System.out.println("Text rewritten correctly!\nTime: " + time[0] + '.' + time[1] + 's');
+            System.out.println("Text rewritten correctly!\nTime: " + time + " seconds.");
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
                 System.err.println(e.getMessage());
             }
-            score.addScoreCoinsFastTyping(tries, Integer.parseInt(time[0]));
+            playerScoreCoins.addScoreCoinsFastTyping(tries, Integer.parseInt(time));
         } else {
             tries--;
             UserInterface.clearScreen();

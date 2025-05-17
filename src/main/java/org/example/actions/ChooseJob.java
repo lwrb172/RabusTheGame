@@ -3,22 +3,19 @@ package org.example.actions;
 import org.example.entities.Player;
 import org.example.gameManagment.TimeManager;
 
-import java.util.Random;
-
-public class WorkAction implements Action {
-    private final Random rand = new Random();
+public class ChooseJob implements Action {
     @Override
     public void execute(Player player, TimeManager time) {
-        player.getJob().startJob(player.getJob().getJobName());
+        player.getJob().chooseJob();
     }
 
     @Override
     public String getName() {
-        return "Work";
+        return "Choose job";
     }
 
     @Override
     public String getDescription() {
-        return "Go to work to earn coins and points.";
+        return "Choose between three unique jobs.";
     }
 }

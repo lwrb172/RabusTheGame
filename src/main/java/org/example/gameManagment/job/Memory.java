@@ -15,7 +15,12 @@ public class Memory {
     private final boolean[] revealedStatus = new boolean[12];
     private int gameScore = 0;
     private int mistakes = 0;
-    ScoreAndCoins score = new ScoreAndCoins(); //todo score od playera podawany
+    private final Frame frame = new Frame();
+    private final ScoreAndCoins playerScoreCoins;
+
+    public Memory(ScoreAndCoins playerScoreCoins) {
+        this.playerScoreCoins = playerScoreCoins;
+    }
 
     public void start() {
         generateCardsValues();
@@ -23,7 +28,7 @@ public class Memory {
             printCards();
             pickCards();
         } while (gameScore != 6);
-        score.addScoreCoinsMemory(mistakes);
+        playerScoreCoins.addScoreCoinsMemory(mistakes);
     }
 
     private void pickCards() {
@@ -46,11 +51,6 @@ public class Memory {
                 revealedStatus[card - 1] = true;
                 UserInterface.clearScreen();
                 printCards();
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    System.err.println(e.getMessage());
-                }
                 return card;
             }
             System.out.println("Card already picked, choose another!\n");
@@ -108,7 +108,7 @@ public class Memory {
         }
         System.out.println("Score: " + Color.GREEN + gameScore + Color.RESET +" | Mistakes: " + Color.RED + mistakes + Color.RESET);
         try {
-            Thread.sleep(2000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             System.err.println(e.getMessage());
         }
@@ -125,8 +125,8 @@ public class Memory {
                     "|_____|");
         }
 
-        String[] card = Arrays.copyOf(Frame.CARD_FRAME, Frame.CARD_FRAME.length);
-        String pattern = Frame.CARD_PATTERNS[value - 1];
+        String[] card = Arrays.copyOf(frame.CARD_FRAME, frame.CARD_FRAME.length);
+        String pattern = frame.CARD_PATTERNS[value - 1];
         String[] patternLines = pattern.split("\n");
 
         for (int i = 0; i < patternLines.length && (i + 2) < card.length; i++) {

@@ -2,6 +2,8 @@ package org.example.entities;
 
 import org.example.frames.Color;
 import org.example.gameManagment.Item;
+import org.example.gameManagment.ScoreAndCoins;
+import org.example.gameManagment.UserInterface;
 import org.example.gameManagment.job.Job;
 
 import java.util.*;
@@ -12,11 +14,12 @@ public class Player {
     private int hunger;
     private int energy;
     private int hygiene;
-    private int coins;
     private Pet pet;
-    private Job job;
-    private List<Item> inventory;
-    private int streak = 0;
+    private final Job job;
+    private final List<Item> inventory;
+    private int streak;
+    private final ScoreAndCoins scoreAndCoins;
+    private boolean gameOver;
 
     public Player(String name, String color) {
         this.name = name;
@@ -24,8 +27,10 @@ public class Player {
         this.hunger = 100;
         this.energy = 100;
         this.hygiene = 100;
-        this.coins = 50;
-        this.job = new Job(getName());
+        this.streak = 0;
+        this.gameOver = false;
+        this.scoreAndCoins = new ScoreAndCoins();
+        this.job = new Job(getName(), getScoreAndCoins());
         this.inventory = new ArrayList<>();
         inventory.add(new Item("Apple", "", 10, "food", 15));
         inventory.add(new Item("Banana", "", 12, "food", 17));
@@ -38,16 +43,16 @@ public class Player {
         this.hunger = 100;
         this.energy = 100;
         this.hygiene = 100;
-        this.coins = 50;
-        this.job = new Job(getName());
+        this.job = new Job(getName(), getScoreAndCoins());
+        this.scoreAndCoins = new ScoreAndCoins();
         this.inventory = new ArrayList<>();
         inventory.add(new Item("Apple", "", 10, "food", 30));
         inventory.add(new Item("Banana", "", 12, "food", 35));
     }
 
     public void update() {
-        hunger = Math.max(hunger-5, 0);
-        energy = Math.max(energy-1, 0);
+        hunger = Math.max(hunger-10, 0);
+        energy = Math.max(energy-15, 0);
         if (hunger < 20) {
             energy = Math.max(energy-2, 0);
             System.out.println("You're hungry!");
@@ -55,22 +60,37 @@ public class Player {
         if (energy < 20) {
             System.out.println("Your energy is low!");
         }
-        if (hunger == 100) {
+        if (hunger == 0) {
+            UserInterface.clearScreen();
             System.out.println("You died from starvation!");
+            gameOver = true;
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                System.err.println(e.getMessage());
+            }
         }
         if (energy == 0) {
+            UserInterface.clearScreen();
             System.out.println("You're completely exhausted!");
+            gameOver = true;
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                System.err.println(e.getMessage());
+            }
         }
     }
 
     public String getStatus() {
         return String.format(
-                "%s\n" + Color.RED + "Hunger:" + Color.RESET + " %d/100 | " + Color.GREEN + "Energy:" + Color.RESET + " %d/100 | " + Color.BLUE + "Hygiene:" + Color.RESET + " %d/100\n" + Color.YELLOW + "Coins: %d" + Color.RESET,
+                "%s\n" + Color.RED + "Hunger:" + Color.RESET + " %d/100 | " + Color.GREEN + "Energy:" + Color.RESET + " %d/100 | " + Color.BLUE + "Hygiene:" + Color.RESET + " %d/100\n" + Color.PURPLE + "Score: %d\n" + Color.RESET + Color.YELLOW + "Coins: %d" + Color.RESET,
                 name,
                 hunger,
                 energy,
                 hygiene,
-                coins
+                scoreAndCoins.getPlayerScore(),
+                scoreAndCoins.getPlayerCoins()
         );
     }
 
@@ -91,21 +111,21 @@ public class Player {
 //    }
 
     public void loseCoins(int amount) {
-        this.coins -= amount;
+        this.scoreAndCoins.decreasePlayerCoins(amount);
     }
 
     public void addCoins(int amount) {
-        this.coins += amount;
+        this.scoreAndCoins.addPlayerCoins(amount);
     }
 
-    public void incrementStreak() {
+    public void incrementRabusStreak() {
         streak++;
         if (streak >= 0)
             System.out.println("Secret Ending!");
     }
 
     public int getCoins() {
-        return coins;
+        return this.scoreAndCoins.getPlayerCoins();
     }
 
     public List<Item> getInventory() {
@@ -117,6 +137,8 @@ public class Player {
     public String getPetType() { return pet.getType(); }
 
     public String getName() { return name; }
+
+    public Job getJob() { return job; }
 
     public String getColor() { return color; }
 
@@ -139,4 +161,8 @@ public class Player {
     public Object getPet() {
         return null;
     }
+
+    public ScoreAndCoins getScoreAndCoins() { return scoreAndCoins; }
+
+    public boolean getGameOver() { return gameOver; }
 }

@@ -34,10 +34,11 @@ public class World {
         locations.put("shop", shop);
         locations.put("park", park);
 
-        home.addAction(new SleepAction());
         home.addAction(new EatAction());
-        home.addAction(new WorkAction());
+        home.addAction(new SleepAction());
         home.addAction(new TalkAction());
+        home.addAction(new ChooseJob());
+        home.addAction(new WorkAction());
         shop.addAction(new BuyAction());
 
         NPC helper = new NPC("helper", "This is a NPC. He will guide you and provide help trough your adventures.");

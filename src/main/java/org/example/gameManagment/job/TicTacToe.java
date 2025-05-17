@@ -13,11 +13,12 @@ public class TicTacToe {
     private final int[] gameScores = new int[3]; // player, comp, draw
     private final int[] board = new int[9];
     private final String playerName;
+    private final ScoreAndCoins playerScoreCoins;
     Random random = new Random();
-    ScoreAndCoins score = new ScoreAndCoins();
 
-    public TicTacToe(String playerName) {
+    public TicTacToe(String playerName, ScoreAndCoins playerScoreCoins) {
         this.playerName = playerName;
+        this.playerScoreCoins = playerScoreCoins;
     }
 
     public void start() {
@@ -40,7 +41,7 @@ public class TicTacToe {
         for (int i = 0; i < 3; i++) {
             if (gameScores[i] == 3) {
                 UserInterface.clearScreen();
-                score.addScoreCoinsTicTacToe(i, gameScores[1]);
+                playerScoreCoins.addScoreCoinsTicTacToe(i, gameScores[1]);
                 return true;
             }
         }

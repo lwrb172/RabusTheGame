@@ -26,6 +26,6 @@ public class SleepAction implements Action {
 
     @Override
     public String getDescription() {
-        return "go to sleep and get some rest.";
+        return "Go to sleep and get some rest.";
     }
 }

@@ -21,4 +21,40 @@ public enum Color {
 
     @Override
     public String toString() { return color; }
+
+    public static String toMyString(Color color) {
+        return switch (color) {
+            case Color.RED -> "red";
+            case Color.GREEN -> "green";
+            case Color.CYAN -> "cyan";
+            case Color.BLUE -> "blue";
+            case Color.YELLOW -> "yellow";
+            case Color.PINK -> "pink";
+            case Color.PURPLE -> "purple";
+            case Color.GRAY -> "gray";
+            case Color.BROWN -> "brown";
+            case Color.DARKBROWN -> "darkbrown";
+            case Color.BLACK -> "black";
+            case Color.WHITE -> "white";
+            default -> null;
+        };
+    }
+
+    public static Color toColor(String color) {
+        return switch (color) {
+            case "red" -> Color.RED;
+            case "green" -> Color.GREEN;
+            case "cyan" -> Color.CYAN;
+            case "blue" -> Color.BLUE;
+            case "yellow" -> Color.YELLOW;
+            case "pink" -> Color.PINK;
+            case "purple" -> Color.PURPLE;
+            case "gray" -> Color.GRAY;
+            case "brown" -> Color.BROWN;
+            case "darkbrown" -> Color.DARKBROWN;
+            case "black" -> Color.BLACK;
+            case "white" -> Color.WHITE;
+            default -> null;
+        };
+    }
 }

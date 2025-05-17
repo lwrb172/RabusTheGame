@@ -48,6 +48,6 @@ public class BuyAction implements Action {
 
     @Override
     public String getDescription() {
-        return "look what shop offers you.";
+        return "Look what shop offers you.";
     }
 }

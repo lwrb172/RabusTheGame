@@ -5,10 +5,16 @@ import org.example.frames.Color;
 import java.util.Random;
 
 public class ScoreAndCoins {
-    private double playerScore = 0;
-    private int playerCoins = 0;
-    private int playerRabusStreak = 0;
+    private int playerScore;
+    private int playerCoins;
+    private int playerRabusStreak;
     Random random = new Random();
+
+    public ScoreAndCoins() {
+        this.playerScore = 10;
+        this.playerCoins = 10;
+        this.playerRabusStreak = 0;
+    }
 
     public void printScore() {
         System.out.println(playerScore);
@@ -35,8 +41,8 @@ public class ScoreAndCoins {
             y = random.nextInt(10, 50);
         }
         UserInterface.clearScreen();
-        playerScore += x;
-        playerCoins += y;
+        this.playerScore += x;
+        this.playerCoins += y;
         System.out.println("You got " + Color.CYAN + x + Color.RESET + " points!\nYou got " + Color.YELLOW + y + Color.RESET + " coins!");
         try {
             Thread.sleep(3000);
@@ -71,8 +77,8 @@ public class ScoreAndCoins {
                 break;
         }
         UserInterface.clearScreen();
-        playerScore += x;
-        playerCoins += y;
+        this.playerScore += x;
+        this.playerCoins += y;
         System.out.println("You got " + Color.CYAN + x + Color.RESET + " points!\nYou got " + Color.YELLOW + y + Color.RESET + " coins!");
         try {
             Thread.sleep(3000);
@@ -81,7 +87,7 @@ public class ScoreAndCoins {
         }
     }
 
-    public void addScoreCoinsFastTyping(int tries, int time) {
+    public void addScoreCoinsFastTyping(int tries, int time) { //todo debug
         int x = 0;
         int y = 0;
         switch (tries) {
@@ -114,8 +120,8 @@ public class ScoreAndCoins {
                 break;
         }
         UserInterface.clearScreen();
-        playerScore += x;
-        playerCoins += y;
+        this.playerScore = x;
+        this.playerCoins += y;
         System.out.println("You got " + Color.CYAN + x + Color.RESET + " points!\nYou got " + Color.YELLOW + y + Color.RESET + " coins!");
         try {
             Thread.sleep(3000);
@@ -125,4 +131,14 @@ public class ScoreAndCoins {
     }
 
     public void addRabusStreak() { playerRabusStreak++; }
+
+    public int getPlayerCoins() { return playerCoins; }
+
+    public int getPlayerScore() { return playerScore; }
+
+    public void addPlayerCoins(int amount) { playerCoins += amount; }
+
+    public void decreasePlayerCoins(int amount) { playerCoins -= amount; }
+
+    public void addPlayerScore(int amount) { playerScore += amount; }
 }
