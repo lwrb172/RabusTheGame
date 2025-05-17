@@ -22,16 +22,16 @@ public class ScoreAndCoins {
         int x;
         int y;
         if (mistakes <= 5) {
-            x = 3000;
+            x = 10000;
             y = random.nextInt(200, 300);
         } else if (mistakes <= 8) {
-            x = 1000;
+            x = 5000;
             y = random.nextInt(100, 200);
         } else if (mistakes <= 12) {
-            x = 500;
+            x = 1000;
             y = random.nextInt(50, 100);
         } else {
-            x = 100;
+            x = 500;
             y = random.nextInt(10, 50);
         }
         UserInterface.clearScreen();
@@ -68,6 +68,49 @@ public class ScoreAndCoins {
             default:
                 x = 3000;
                 y = random.nextInt(100, 200);
+                break;
+        }
+        UserInterface.clearScreen();
+        playerScore += x;
+        playerCoins += y;
+        System.out.println("You got " + Color.CYAN + x + Color.RESET + " points!\nYou got " + Color.YELLOW + y + Color.RESET + " coins!");
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public void addScoreCoinsFastTyping(int tries, int time) {
+        int x = 0;
+        int y = 0;
+        switch (tries) {
+            case 3:
+                if (time <= 20) {
+                    x = 10000;
+                    y = random.nextInt(250, 300);
+                } else {
+                    x = 7500;
+                    y = random.nextInt(200, 250);
+                }
+                break;
+            case 2:
+                if (time <= 20) {
+                    x = 7500;
+                    y = random.nextInt(200, 250);
+                } else {
+                    x = 5000;
+                    y = random.nextInt(150, 200);
+                }
+                break;
+            case 1:
+                if (time <= 20) {
+                    x = 5000;
+                    y = random.nextInt(150, 200);
+                } else {
+                    x = 1000;
+                    y = random.nextInt(100, 150);
+                }
                 break;
         }
         UserInterface.clearScreen();

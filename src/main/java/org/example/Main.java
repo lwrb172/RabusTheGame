@@ -6,6 +6,7 @@ import org.example.frames.Frame;
 import org.example.gameManagment.GameManager;
 import org.example.gameManagment.InputValidator;
 import org.example.gameManagment.Item;
+import org.example.gameManagment.job.FastTyping;
 import org.example.gameManagment.job.Memory;
 import org.example.gameManagment.job.TicTacToe;
 
@@ -36,7 +37,8 @@ public class Main {
         // TEST JOB
         //new Memory().start();
         Player player = new Player("Kacper", "green");
-        new TicTacToe(player.getName()).start();
+        //new TicTacToe(player.getName()).start();
         //new Memory().start();
+        new FastTyping().start();
     }
 }

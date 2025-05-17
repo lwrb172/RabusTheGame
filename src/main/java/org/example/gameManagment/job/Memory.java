@@ -15,7 +15,7 @@ public class Memory {
     private final boolean[] revealedStatus = new boolean[12];
     private int gameScore = 0;
     private int mistakes = 0;
-    ScoreAndCoins score = new ScoreAndCoins();
+    ScoreAndCoins score = new ScoreAndCoins(); //todo score od playera podawany
 
     public void start() {
         generateCardsValues();
