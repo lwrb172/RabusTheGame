@@ -167,11 +167,7 @@ public class Frame {
 
         UserInterface.clearScreen();
         System.out.print("I'm throwing coin...");
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            System.err.println(e.getMessage());
-        }
+        UserInterface.threadSleep(2000);
 
         String result = "";
         int i = 0;
@@ -182,31 +178,19 @@ public class Frame {
             System.out.print("\r" + "Result: " + side);
             result = side;
             i++;
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                System.err.println(e.getMessage());
-            }
+            UserInterface.threadSleep(2000);
         }
         System.out.print("\r" + "Result: " + result + "       \n");
 
         if(result.toLowerCase().equals(choice)) {
             UserInterface.clearScreen();
             System.out.print("I'm letting you go... this time.");
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                System.err.println(e.getMessage());
-            }
+            UserInterface.threadSleep(3000);
             //score.addRabusStreak();
         } else {
             UserInterface.clearScreen();
             System.out.print("Too bad, you lose ;)");
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                System.err.println(e.getMessage());
-            }
+            UserInterface.threadSleep(3000);
             // TO-DO lose
         }
     }

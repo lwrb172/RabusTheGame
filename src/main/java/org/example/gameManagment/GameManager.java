@@ -93,35 +93,50 @@ public class GameManager {
         UserInterface.clearScreen();
         UserInterface.showMessage("\n--- " + time.getFormattedTime() + " ---");
 
-
-        frame.printMainRoom();
+        switch (world.getCurrentLocation().getName()) {
+            case "Main Room":
+                frame.printMainRoom();
+                break;
+            case "Kitchen":
+                frame.printKitchen();
+                break;
+            case "Bathroom":
+                frame.printBathroom();
+                break;
+            case "Shop":
+                frame.printShop();
+                break;
+            case "Park":
+                frame.printPark();
+                break;
+            default:
+                break;
+        }
 
         UserInterface.displayLocationInfo(world.getCurrentLocation());
         System.out.println();
+
         UserInterface.showMessage(player.getStatus());
         System.out.println();
+
         UserInterface.showMessage("Available locations:");
         List<Location> locations = world.getAllLocations();
         for (Location location : locations) {
             System.out.print(location.getName() + ' ');
         }
-        System.out.println();
-        // show NPC
 
         actions = world.getCurrentLocation().getActions();
-
-        System.out.println();
-        UserInterface.showMessage("Actions:");
+        UserInterface.showMessage("\n\nActions:");
         for (int i = 0; i < actions.size(); i++) {
             Action action = actions.get(i);
             UserInterface.showMessage((i+1) + ". " + action.getName() + " (" + action.getDescription() + ")");
         }
+
         UserInterface.showMessage("\nEnter action number or location name:");
     }
 
     private void mainGameInput() {
             String input = scanner.nextLine().toLowerCase();
-
             try {
                 int actionIndex = Integer.parseInt(input);
                 actions = world.getCurrentLocation().getActions();
@@ -134,11 +149,20 @@ public class GameManager {
             } catch (NumberFormatException e) {
                 // if not number - check locations
                 if (!world.moveToLocation(input)) {
-                    if (input.equals("exit")) {
-                        System.out.println("You left the game.");
-                        isRunning = false;
-                    } else {
-                        System.out.println("Invalid command!");
+                    switch (input) {
+                        case "godmode123":
+                            UserInterface.clearScreen();
+                            System.out.println("God Mode enabled.");
+                            player.enableGodMode();
+                            UserInterface.threadSleep(3000);
+                            break;
+                        case "exit":
+                            System.out.println("You left the game.");
+                            isRunning = false;
+                            break;
+                        default:
+                            System.out.println("Invalid command!");
+                            break;
                     }
                 }
             }

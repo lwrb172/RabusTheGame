@@ -7,6 +7,7 @@ public class ChooseJob implements Action {
     @Override
     public void execute(Player player, TimeManager time) {
         player.getJob().chooseJob();
+        player.setShouldNotUpdate();
     }
 
     @Override

@@ -17,10 +17,6 @@ public class Item {
         this.effectValue = effectValue;
     }
 
-    public void use(Player player) {
-
-    }
-
     public String getName() {
         return name;
     }

@@ -1,22 +1,24 @@
 package org.example.actions;
 
 import org.example.entities.Player;
+import org.example.gameManagment.InputValidator;
 import org.example.gameManagment.TimeManager;
-
-import java.util.Scanner;
+import org.example.gameManagment.UserInterface;
 
 public class SleepAction implements Action {
     @Override
     public void execute(Player player, TimeManager time) {
-        System.out.println("How many hours you want to sleep?");
-        Scanner scanner = new Scanner(System.in);
-        int hours = scanner.nextInt();
+        int hours = InputValidator.getIntInput("How many hours you want to sleep?: ", 1, 24);
 
         time.setHour(time.getHour() + hours);
         player.setEnergy(Math.min(player.getEnergy()+hours*10, 100));
-        player.setHunger(Math.max(player.getHunger()-hours*5, 0));
+        if (!player.getGodMode()){
+            player.setHunger(Math.max(player.getHunger() - hours * 2, 0));
+        }
 
-        System.out.println("You slept for " + hours + ".");
+        UserInterface.clearScreen();
+        System.out.println("You slept for " + hours + " hours.");
+        UserInterface.threadSleep(2000);
     }
 
     @Override

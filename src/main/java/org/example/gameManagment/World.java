@@ -26,29 +26,34 @@ public class World {
     }
 
     private void initWorld() {
-        Location home = new Location("Home", "Your Home.");
+        Location mainRoom = new Location("Main Room", "Your home.");
+        Location kitchen = new Location("Kitchen", "Place where you can eat.");
+        Location bathroom = new Location("Bathroom", "Place where you can wash yourself.");
         Location shop = new Location("Shop", "This is Shop. You can buy items here.");
         Location park = new Location("Park", "Good place to relax.");
 
-        locations.put("home", home);
+        locations.put("main room", mainRoom);
+        locations.put("kitchen", kitchen);
+        locations.put("bathroom", bathroom);
         locations.put("shop", shop);
         locations.put("park", park);
 
-        home.addAction(new EatAction());
-        home.addAction(new SleepAction());
-        home.addAction(new TalkAction());
-        home.addAction(new ChooseJob());
-        home.addAction(new WorkAction());
-        shop.addAction(new BuyAction());
+        mainRoom.addAction(new SleepAction());
+        mainRoom.addAction(new TalkAction());
+        mainRoom.addAction(new ChooseJob());
+        mainRoom.addAction(new WorkAction());
+        shop.addAction(new BuyFoodAction());
+        kitchen.addAction(new EatAction());
+        //bathroom.addAction(new WashAction()); //todo
 
         NPC helper = new NPC("helper", "This is a NPC. He will guide you and provide help trough your adventures.");
         NPC cashier = new NPC("Cashier", "shop cashier.");
         npcs.put("cashier", cashier);
 
-        home.addNPC(helper);
+        mainRoom.addNPC(helper);
         shop.addNPC(cashier);
 
-        currentLocation = home;
+        currentLocation = mainRoom;
     }
 
     private void initEvents() {
@@ -81,14 +86,6 @@ public class World {
             }
         }
         return presentNPCs;
-    }
-
-    public String interactWithNPC(String npcName, String interactionType, int currentHour) {
-        NPC npc = npcs.get(npcName.toLowerCase());
-        if (npc != null && getCurrentNPCs(currentHour).contains(npc)) {
-            return npc.interact(interactionType);
-        }
-        return "This person is not here!";
     }
 
     public Location getCurrentLocation() {

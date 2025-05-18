@@ -20,6 +20,9 @@ public class Player {
     private int streak;
     private final ScoreAndCoins scoreAndCoins;
     private boolean gameOver;
+    private boolean shouldNotUpdate;
+    private boolean godMode;
+    private boolean workUpdate;
 
     public Player(String name, String color) {
         this.name = name;
@@ -32,8 +35,10 @@ public class Player {
         this.scoreAndCoins = new ScoreAndCoins();
         this.job = new Job(getName(), getScoreAndCoins());
         this.inventory = new ArrayList<>();
-        inventory.add(new Item("Apple", "", 10, "food", 15));
-        inventory.add(new Item("Banana", "", 12, "food", 17));
+        this.shouldNotUpdate = true;
+        this.godMode = false;
+        inventory.add(new Item("Apple", "", 10, "food", 20));
+        inventory.add(new Item("Banana", "", 12, "food", 20));
     }
 
     public Player(String name, String color, Pet pet) {
@@ -46,40 +51,24 @@ public class Player {
         this.job = new Job(getName(), getScoreAndCoins());
         this.scoreAndCoins = new ScoreAndCoins();
         this.inventory = new ArrayList<>();
-        inventory.add(new Item("Apple", "", 10, "food", 30));
-        inventory.add(new Item("Banana", "", 12, "food", 35));
+        this.shouldNotUpdate = true;
+        this.godMode = false;
+        inventory.add(new Item("Apple", "", 10, "food", 20));
+        inventory.add(new Item("Banana", "", 12, "food", 20));
     }
 
     public void update() {
-        hunger = Math.max(hunger-10, 0);
-        energy = Math.max(energy-15, 0);
-        if (hunger < 20) {
-            energy = Math.max(energy-2, 0);
-            System.out.println("You're hungry!");
-        }
-        if (energy < 20) {
-            System.out.println("Your energy is low!");
-        }
-        if (hunger == 0) {
-            UserInterface.clearScreen();
-            System.out.println("You died from starvation!");
-            gameOver = true;
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                System.err.println(e.getMessage());
+        if (!godMode) {
+            if (!shouldNotUpdate) {
+                if (!workUpdate) {
+                    setHungerEnergy(10, 15, 5);
+                } else {
+                    setHungerEnergy(20, 20, 15);
+                    workUpdate = false;
+                }
             }
         }
-        if (energy == 0) {
-            UserInterface.clearScreen();
-            System.out.println("You're completely exhausted!");
-            gameOver = true;
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                System.err.println(e.getMessage());
-            }
-        }
+        shouldNotUpdate = false;
     }
 
     public String getStatus() {
@@ -94,22 +83,6 @@ public class Player {
         );
     }
 
-    public void eat(Item food) {
-        if (food.getType().equals("food")) {
-            hunger = Math.min(hunger+food.getEffectValue(), 100);
-            System.out.println("You have eaten and regenerated " + food.getEffectValue() + " hunger.");
-            inventory.remove(food);
-        } else {
-            System.out.println("You can't eat this!");
-        }
-    }
-
-//    public void sleep(int hours) {
-//        energy = Math.min(energy+hours*10, 100);
-//        hunger = Math.max(hunger-hours*5, 0);
-//        System.out.println("You slept for " + hours + ".");
-//    }
-
     public void loseCoins(int amount) {
         this.scoreAndCoins.decreasePlayerCoins(amount);
     }
@@ -118,10 +91,11 @@ public class Player {
         this.scoreAndCoins.addPlayerCoins(amount);
     }
 
-    public void incrementRabusStreak() {
-        streak++;
-        if (streak >= 0)
-            System.out.println("Secret Ending!");
+    private void death(String prompt) {
+        UserInterface.clearScreen();
+        System.out.println(prompt);
+        gameOver = true;
+        UserInterface.threadSleep(3000);
     }
 
     public int getCoins() {
@@ -165,4 +139,42 @@ public class Player {
     public ScoreAndCoins getScoreAndCoins() { return scoreAndCoins; }
 
     public boolean getGameOver() { return gameOver; }
+
+    public void setShouldNotUpdate() { this.shouldNotUpdate = true; }
+
+    public void setWorkUpdate() { this.workUpdate = true; }
+
+    public void setHungerEnergy(int hungerPoints, int energyPoints, int hygienePoints) {
+        hunger = Math.max(hunger - hungerPoints, 0);
+        energy = Math.max(energy - energyPoints, 0);
+        hygiene = Math.max(hygiene - hygienePoints, 0);
+        if (hunger <= 20) {
+            UserInterface.clearScreen();
+            System.out.println("You're hungry!");
+            UserInterface.threadSleep(2000);
+        }
+        if (energy <= 25) {
+            UserInterface.clearScreen();
+            System.out.println("You're are getting very tired!");
+            UserInterface.threadSleep(2000);
+        }
+        if (hygiene <= 25) {
+            UserInterface.clearScreen();
+            System.out.println("You're starting to smell really bad!");
+            UserInterface.threadSleep(2000);
+        }
+        if (hunger == 0) {
+            death("You forgot to eat. Now you're dead.");
+        }
+        if (energy == 0) {
+            death("Your body gave up... You died from exhaustion!");
+        }
+        if (hygiene == 0) {
+            death("Your terrible smell drove everyone away... including life itself!");
+        }
+    }
+
+    public void enableGodMode() { this.godMode = true; }
+
+    public boolean getGodMode() { return godMode; }
 }

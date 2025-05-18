@@ -15,4 +15,12 @@ public class UserInterface {
         //System.out.print("\033[H\033[2J");
         //System.out.flush();
     }
+
+    public static void threadSleep(int milis) {
+        try {
+            Thread.sleep(milis);
+        } catch (InterruptedException e) {
+            System.err.println(e.getMessage());
+        }
+    }
 }
