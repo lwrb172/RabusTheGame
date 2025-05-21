@@ -61,9 +61,9 @@ public class Player {
         if (!godMode) {
             if (!shouldNotUpdate) {
                 if (!workUpdate) {
-                    setHungerEnergy(10, 15, 5);
+                    decreaseStats(10, 15, 5);
                 } else {
-                    setHungerEnergy(20, 20, 15);
+                    decreaseStats(20, 20, 15);
                     workUpdate = false;
                 }
             }
@@ -91,7 +91,7 @@ public class Player {
         this.scoreAndCoins.addPlayerCoins(amount);
     }
 
-    private void death(String prompt) {
+    public void death(String prompt) {
         UserInterface.clearScreen();
         System.out.println(prompt);
         gameOver = true;
@@ -124,12 +124,20 @@ public class Player {
         return energy;
     }
 
-    public void setHunger(int hunger) {
-        this.hunger = hunger;
+    public int getHygiene() {
+        return hygiene;
     }
 
-    public void setEnergy(int energy) {
-        this.energy = energy;
+    public void addHunger(int hunger) {
+        this.hunger += hunger;
+    }
+
+    public void addEnergy(int energy) {
+        this.energy += energy;
+    }
+
+    public void addHygiene(int hygiene) {
+        this.hygiene += hygiene;
     }
 
     public Object getPet() {
@@ -144,7 +152,7 @@ public class Player {
 
     public void setWorkUpdate() { this.workUpdate = true; }
 
-    public void setHungerEnergy(int hungerPoints, int energyPoints, int hygienePoints) {
+    public void decreaseStats(int hungerPoints, int energyPoints, int hygienePoints) {
         hunger = Math.max(hunger - hungerPoints, 0);
         energy = Math.max(energy - energyPoints, 0);
         hygiene = Math.max(hygiene - hygienePoints, 0);
@@ -177,4 +185,10 @@ public class Player {
     public void enableGodMode() { this.godMode = true; }
 
     public boolean getGodMode() { return godMode; }
+
+    public void addRabusStreak() { scoreAndCoins.addRabusStreak(); }
+
+    public void addScore(int amount) { scoreAndCoins.addPlayerScore(amount); }
+
+    public void decreaseCoins(int amount) { scoreAndCoins.decreasePlayerCoins(amount); }
 }

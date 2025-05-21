@@ -7,7 +7,7 @@ public class TimeManager {
 
     public TimeManager() {
         this.day = 1;
-        this.hour = 7;
+        this.hour = 22;
         this.minute = 30;
     }
 

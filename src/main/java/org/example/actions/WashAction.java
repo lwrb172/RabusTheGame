@@ -1,19 +1,16 @@
 package org.example.actions;
 
 import org.example.entities.Player;
-import org.example.gameManagment.InputValidator;
 import org.example.gameManagment.TimeManager;
 import org.example.gameManagment.UserInterface;
 
-public class SleepAction implements Action {
-    @Override
+public class WashAction implements Action{
     public void execute(Player player, TimeManager time) {
-        int hours = InputValidator.getIntInput("How many hours you want to sleep?: ", 1, 24);
+        player.decreaseStats(20,10,0);
 
-        time.setHour(time.getHour() + hours);
-        player.addEnergy(Math.min(player.getEnergy()+hours*15, 100));
+        player.setEnergy(Math.min(player.getEnergy()+hours*15, 100));
         if (!player.getGodMode()){
-            player.addHunger(Math.max(player.getHunger() - hours * 2, 0));
+            player.setHunger(Math.max(player.getHunger() - hours * 2, 0));
         }
 
         UserInterface.clearScreen();
@@ -21,13 +18,11 @@ public class SleepAction implements Action {
         UserInterface.threadSleep(2000);
     }
 
-    @Override
     public String getName() {
-        return "Sleep";
+        return "";
     }
 
-    @Override
     public String getDescription() {
-        return "Go to sleep and get some rest.";
+        return "";
     }
 }

@@ -7,7 +7,7 @@ import org.example.gameManagment.UserInterface;
 import java.util.Random;
 
 public class Frame {
-    private static final String[] coinFlip = {
+    private static final String[] coinFrames = {
             Color.YELLOW + "  .-----.\n" + Color.RESET + // 1
             Color.YELLOW + " /  ★ ★  \\\n" + Color.RESET +
             Color.YELLOW + "|  ★ $ ★  |\n" + Color.RESET +
@@ -128,6 +128,12 @@ public class Frame {
             Color.RED + " / \\" + Color.RESET
     };
 
+    private final String[] noNPC = {
+            "     ",
+            "    ",
+            "    "
+    };
+
     private String[] playerBody = {
             "     ",
             "    ",
@@ -161,39 +167,7 @@ public class Frame {
             "       "
     };
 
-    public static void printCoinFlip(String choice) { //todo przeniesc funkcjonalnosc do eventa
-        String[] sides = {"HEADS", "TAILS"};
-        Random rand = new Random();
-
-        UserInterface.clearScreen();
-        System.out.print("I'm throwing coin...");
-        UserInterface.threadSleep(2000);
-
-        String result = "";
-        int i = 0;
-        for (String frame : coinFlip) {
-            UserInterface.clearScreen();
-            System.out.println(frame);
-            String side = sides[rand.nextInt(2)];
-            System.out.print("\r" + "Result: " + side);
-            result = side;
-            i++;
-            UserInterface.threadSleep(2000);
-        }
-        System.out.print("\r" + "Result: " + result + "       \n");
-
-        if(result.toLowerCase().equals(choice)) {
-            UserInterface.clearScreen();
-            System.out.print("I'm letting you go... this time.");
-            UserInterface.threadSleep(3000);
-            //score.addRabusStreak();
-        } else {
-            UserInterface.clearScreen();
-            System.out.print("Too bad, you lose ;)");
-            UserInterface.threadSleep(3000);
-            // TO-DO lose
-        }
-    }
+    public String[] getCoinFrames() { return coinFrames; }
 
     public void printPlayer() { System.out.print(playerBody[0] + '\n' + playerBody[1] + '\n' + playerBody[2] + '\n'); }
 
@@ -310,6 +284,9 @@ public class Frame {
             }
             case "Oliwier" -> {
                 insert(npc2, npcBody);
+            }
+            default -> {
+                insert(noNPC, npcBody);
             }
         }
     }

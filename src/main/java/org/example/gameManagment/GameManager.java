@@ -19,11 +19,11 @@ public class GameManager {
     private final Frame frame;
 
     public GameManager() {
-        this.world = new World();
+        this.frame = new Frame();
+        this.world = new World(frame);
         this.time = new TimeManager();
         this.actions = new ArrayList<>();
         this.scanner = new Scanner(System.in);
-        this.frame = new Frame();
     }
 
     public void startMenu() {
@@ -79,11 +79,7 @@ public class GameManager {
              } else {
                  UserInterface.clearScreen();
                  System.out.println("Game over");
-                 try {
-                     Thread.sleep(3000);
-                 } catch (InterruptedException e) {
-                     System.err.println(e.getMessage());
-                 }
+                 UserInterface.threadSleep(3000);
                  startMenu();
              }
         }

@@ -35,7 +35,6 @@ public class FastTyping {
 
     public void start() {
         String text = chooseText();
-        text = "a";
         waitForInput(text);
     }
 
@@ -43,11 +42,7 @@ public class FastTyping {
         UserInterface.clearScreen();
         for(int i = 3; i >= 1; i--) {
             System.out.println(i);
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                System.err.println(e.getMessage());
-            }
+            UserInterface.threadSleep(1000);
             UserInterface.clearScreen();
         }
     }
@@ -76,21 +71,13 @@ public class FastTyping {
         if (playerInput.equals(text)) {
             UserInterface.clearScreen();
             System.out.println("Text rewritten correctly!\nTime: " + time + " seconds.");
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                System.err.println(e.getMessage());
-            }
+            UserInterface.threadSleep(3000);
             playerScoreCoins.addScoreCoinsFastTyping(tries, Integer.parseInt(time));
         } else {
             tries--;
             UserInterface.clearScreen();
             System.out.println("Text rewritten uncorrectly...\nTries left: " + tries);
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                System.err.println(e.getMessage());
-            }
+            UserInterface.threadSleep(3000);
             start();
         }
     }

@@ -26,7 +26,6 @@ public class BuyFoodAction implements Action {
 
     @Override
     public void execute(Player player, TimeManager time) {
-        System.out.println("Choose whatever you want:");
         for (int i = 0; i < foods.size(); i++) {
             Item item = foods.get(i);
             System.out.println(
@@ -36,11 +35,20 @@ public class BuyFoodAction implements Action {
                             + " coins."
             );
         }
-        int choice = InputValidator.getIntInput(">>", 1, foods.size());
-        player.getInventory().add(foods.get(choice - 1));
-        UserInterface.clearScreen();
-        System.out.println("You bought: " + foods.get(choice - 1).getName() + " and it's in your inventory.");
-        UserInterface.threadSleep(2000);
+        int choice = InputValidator.getIntInput("Choose whatever you want: ", 1, foods.size());
+        if (player.getScoreAndCoins().getPlayerCoins() >= foods.get(choice - 1).getPrice()) { // if money
+            player.getScoreAndCoins().decreasePlayerCoins(foods.get(choice - 1).getPrice());
+            player.getInventory().add(foods.get(choice - 1));
+            player.setShouldNotUpdate();
+            UserInterface.clearScreen();
+            System.out.println("You bought: " + foods.get(choice - 1).getName() + '.');
+            UserInterface.threadSleep(3000);
+        } else {
+            UserInterface.clearScreen();
+            System.out.println("You're too broke for that mate, go earn some money first!");
+            UserInterface.threadSleep(3000);
+            player.setShouldNotUpdate();
+        }
     }
 
     @Override

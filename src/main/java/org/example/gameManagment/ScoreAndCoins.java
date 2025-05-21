@@ -11,8 +11,8 @@ public class ScoreAndCoins {
     Random random = new Random();
 
     public ScoreAndCoins() {
-        this.playerScore = 10;
-        this.playerCoins = 10;
+        this.playerScore = 0;
+        this.playerCoins = 5000;
         this.playerRabusStreak = 0;
     }
 
@@ -28,27 +28,23 @@ public class ScoreAndCoins {
         int x;
         int y;
         if (mistakes <= 5) {
-            x = 10000;
+            x = 75000;
             y = random.nextInt(200, 300);
         } else if (mistakes <= 8) {
-            x = 5000;
+            x = 50000;
             y = random.nextInt(100, 200);
         } else if (mistakes <= 12) {
-            x = 1000;
+            x = 15000;
             y = random.nextInt(50, 100);
         } else {
-            x = 500;
+            x = 5000;
             y = random.nextInt(10, 50);
         }
         UserInterface.clearScreen();
         this.playerScore += x;
         this.playerCoins += y;
         System.out.println("You got " + Color.CYAN + x + Color.RESET + " points!\nYou got " + Color.YELLOW + y + Color.RESET + " coins!");
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            System.err.println(e.getMessage());
-        }
+        UserInterface.threadSleep(3000);
     }
 
     public void addScoreCoinsTicTacToe(int whoWon, int compScore) {
@@ -57,14 +53,14 @@ public class ScoreAndCoins {
         switch (whoWon) {
             case 0: // player
                 if (compScore == 0) {
-                    x = 10000;
-                    y = random.nextInt(400, 500);
+                    x = 100000;
+                    y = 1000;
                 } else if (compScore == 1) {
-                    x = 7500;
-                    y = random.nextInt(300, 400);
+                    x = 75000;
+                    y = 500;
                 } else {
-                    x = 5000;
-                    y = random.nextInt(200, 300);
+                    x = 50000;
+                    y = random.nextInt(300, 500);
                 }
                 break;
             case 1: // comp
@@ -72,7 +68,7 @@ public class ScoreAndCoins {
                 y = random.nextInt(50, 100);
                 break;
             default:
-                x = 3000;
+                x = 10000;
                 y = random.nextInt(100, 200);
                 break;
         }
@@ -80,54 +76,46 @@ public class ScoreAndCoins {
         this.playerScore += x;
         this.playerCoins += y;
         System.out.println("You got " + Color.CYAN + x + Color.RESET + " points!\nYou got " + Color.YELLOW + y + Color.RESET + " coins!");
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            System.err.println(e.getMessage());
-        }
+        UserInterface.threadSleep(3000);
     }
 
-    public void addScoreCoinsFastTyping(int tries, int time) { //todo debug
+    public void addScoreCoinsFastTyping(int tries, int time) {
         int x = 0;
         int y = 0;
         switch (tries) {
             case 3:
                 if (time <= 20) {
-                    x = 10000;
+                    x = 50000;
                     y = random.nextInt(250, 300);
                 } else {
-                    x = 7500;
+                    x = 30000;
                     y = random.nextInt(200, 250);
                 }
                 break;
             case 2:
                 if (time <= 20) {
-                    x = 7500;
+                    x = 30000;
                     y = random.nextInt(200, 250);
                 } else {
-                    x = 5000;
+                    x = 15000;
                     y = random.nextInt(150, 200);
                 }
                 break;
             case 1:
                 if (time <= 20) {
-                    x = 5000;
+                    x = 10000;
                     y = random.nextInt(150, 200);
                 } else {
-                    x = 1000;
+                    x = 5000;
                     y = random.nextInt(100, 150);
                 }
                 break;
         }
         UserInterface.clearScreen();
-        this.playerScore = x;
+        this.playerScore += x;
         this.playerCoins += y;
         System.out.println("You got " + Color.CYAN + x + Color.RESET + " points!\nYou got " + Color.YELLOW + y + Color.RESET + " coins!");
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            System.err.println(e.getMessage());
-        }
+        UserInterface.threadSleep(3000);
     }
 
     public void addRabusStreak() { playerRabusStreak++; }

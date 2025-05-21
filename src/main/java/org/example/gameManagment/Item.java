@@ -8,6 +8,7 @@ public class Item {
     private final int price;
     private final String type;
     private final int effectValue;
+    private String place = "";
 
     public Item(String name, String description, int price, String type, int effectValue) {
         this.name = name;
@@ -15,6 +16,15 @@ public class Item {
         this.price = price;
         this.type = type;
         this.effectValue = effectValue;
+    }
+
+    public Item(String name, String description, int price, String type, int effectValue, String place) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.type = type;
+        this.effectValue = effectValue;
+        this.place = place;
     }
 
     public String getName() {
@@ -36,4 +46,6 @@ public class Item {
     public int getEffectValue() {
         return effectValue;
     }
+
+    public String getPlace() { return place; }
 }

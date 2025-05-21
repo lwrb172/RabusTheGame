@@ -5,6 +5,7 @@ import org.example.entities.NPC;
 import org.example.entities.Player;
 import org.example.events.Event;
 import org.example.events.RobberyEvent;
+import org.example.frames.Frame;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,15 +13,17 @@ import java.util.List;
 import java.util.Map;
 
 public class World {
-    private Map<String, Location> locations;
-    private Map<String, NPC> npcs;
-    private List<Event> events;
+    private final Map<String, Location> locations;
+    private final Map<String, NPC> npcs;
+    private final List<Event> events;
     private Location currentLocation;
+    private final Frame frame;
 
-    public World() {
+    public World(Frame frame) {
         locations = new HashMap<>();
         npcs = new HashMap<>();
         events = new ArrayList<>();
+        this.frame = frame;
         initWorld();
         initEvents();
     }
@@ -43,8 +46,9 @@ public class World {
         mainRoom.addAction(new ChooseJob());
         mainRoom.addAction(new WorkAction());
         shop.addAction(new BuyFoodAction());
+        shop.addAction(new BuyFurnitureAction(frame));
         kitchen.addAction(new EatAction());
-        //bathroom.addAction(new WashAction()); //todo
+        bathroom.addAction(new WashAction());
 
         NPC helper = new NPC("helper", "This is a NPC. He will guide you and provide help trough your adventures.");
         NPC cashier = new NPC("Cashier", "shop cashier.");
@@ -57,7 +61,7 @@ public class World {
     }
 
     private void initEvents() {
-        events.add(new RobberyEvent());
+        events.add(new RobberyEvent(frame));
     }
 
     public void checkEvents(Player player, TimeManager time) {
