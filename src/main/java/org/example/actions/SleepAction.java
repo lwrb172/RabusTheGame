@@ -11,9 +11,9 @@ public class SleepAction implements Action {
         int hours = InputValidator.getIntInput("How many hours you want to sleep?: ", 1, 24);
 
         time.setHour(time.getHour() + hours);
-        player.addEnergy(Math.min(player.getEnergy()+hours*15, 100));
+        player.setEnergy(Math.min(player.getEnergy()+hours*15, 100));
         if (!player.getGodMode()){
-            player.addHunger(Math.max(player.getHunger() - hours * 2, 0));
+            player.decreaseStatsNoComment(hours * 2,0,15);
         }
 
         UserInterface.clearScreen();

@@ -14,25 +14,23 @@ public class Player {
     private int hunger;
     private int energy;
     private int hygiene;
+    private final ScoreAndCoins scoreAndCoins;
     private Pet pet;
     private final Job job;
     private final List<Item> inventory;
-    private int streak;
-    private final ScoreAndCoins scoreAndCoins;
+
     private boolean gameOver;
     private boolean shouldNotUpdate;
     private boolean godMode;
-    private boolean workUpdate;
 
-    public Player(String name, String color) {
+    public Player(String name, String color, ScoreAndCoins scoreAndCoins) {
         this.name = name;
         this.color = color;
         this.hunger = 100;
         this.energy = 100;
         this.hygiene = 100;
-        this.streak = 0;
         this.gameOver = false;
-        this.scoreAndCoins = new ScoreAndCoins();
+        this.scoreAndCoins = scoreAndCoins;
         this.job = new Job(getName(), getScoreAndCoins());
         this.inventory = new ArrayList<>();
         this.shouldNotUpdate = true;
@@ -41,7 +39,7 @@ public class Player {
         inventory.add(new Item("Banana", "", 12, "food", 20));
     }
 
-    public Player(String name, String color, Pet pet) {
+    public Player(String name, String color, Pet pet, ScoreAndCoins scoreAndCoins) {
         this.name = name;
         this.color = color;
         this.pet = pet;
@@ -49,7 +47,7 @@ public class Player {
         this.energy = 100;
         this.hygiene = 100;
         this.job = new Job(getName(), getScoreAndCoins());
-        this.scoreAndCoins = new ScoreAndCoins();
+        this.scoreAndCoins = scoreAndCoins;
         this.inventory = new ArrayList<>();
         this.shouldNotUpdate = true;
         this.godMode = false;
@@ -60,12 +58,7 @@ public class Player {
     public void update() {
         if (!godMode) {
             if (!shouldNotUpdate) {
-                if (!workUpdate) {
-                    decreaseStats(10, 15, 5);
-                } else {
-                    decreaseStats(20, 20, 15);
-                    workUpdate = false;
-                }
+                decreaseStats(5, 10, 5);
             }
         }
         shouldNotUpdate = false;
@@ -128,16 +121,16 @@ public class Player {
         return hygiene;
     }
 
-    public void addHunger(int hunger) {
-        this.hunger += hunger;
+    public void setHunger(int hunger) {
+        this.hunger = hunger;
     }
 
-    public void addEnergy(int energy) {
-        this.energy += energy;
+    public void setEnergy(int energy) {
+        this.energy = energy;
     }
 
-    public void addHygiene(int hygiene) {
-        this.hygiene += hygiene;
+    public void setHygiene(int hygiene) {
+        this.hygiene = hygiene;
     }
 
     public Object getPet() {
@@ -149,8 +142,6 @@ public class Player {
     public boolean getGameOver() { return gameOver; }
 
     public void setShouldNotUpdate() { this.shouldNotUpdate = true; }
-
-    public void setWorkUpdate() { this.workUpdate = true; }
 
     public void decreaseStats(int hungerPoints, int energyPoints, int hygienePoints) {
         hunger = Math.max(hunger - hungerPoints, 0);
@@ -180,6 +171,12 @@ public class Player {
         if (hygiene == 0) {
             death("Your terrible smell drove everyone away... including life itself!");
         }
+    }
+
+    public void decreaseStatsNoComment(int hungerPoints, int energyPoints, int hygienePoints) {
+        hunger = Math.max(hunger - hungerPoints, 0);
+        energy = Math.max(energy - energyPoints, 0);
+        hygiene = Math.max(hygiene - hygienePoints, 0);
     }
 
     public void enableGodMode() { this.godMode = true; }

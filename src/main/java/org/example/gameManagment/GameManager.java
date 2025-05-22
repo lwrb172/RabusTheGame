@@ -17,6 +17,7 @@ public class GameManager {
     private final Scanner scanner;
     private List<Action> actions;
     private final Frame frame;
+    private final ScoreAndCoins scoreAndCoins;
 
     public GameManager() {
         this.frame = new Frame();
@@ -24,17 +25,29 @@ public class GameManager {
         this.time = new TimeManager();
         this.actions = new ArrayList<>();
         this.scanner = new Scanner(System.in);
+        this.scoreAndCoins = new ScoreAndCoins();
     }
 
     public void startMenu() {
         UserInterface.clearScreen();
         frame.printLogo();
-        int choice = InputValidator.getIntInput("\n1. Create Character\n\n2. Exit\n\n>> ", 1, 2);
+        int choice = InputValidator.getIntInput("\n1. Create Character\n\n2. Scores\n\n3. Exit\n\n>> ", 1, 3);
         switch (choice) {
             case 1:
                 createCharacter();
                 break;
             case 2:
+                if (this.player == null) {
+                    UserInterface.clearScreen();
+                    System.out.println("Nothing here yet!");
+                    UserInterface.threadSleep(3000);
+                    startMenu();
+                }
+                UserInterface.clearScreen();
+                player.getScoreAndCoins().printScores();
+                UserInterface.threadSleep(5000);
+                startMenu();
+            case 3:
                 isRunning = false;
                 break;
         }
@@ -48,7 +61,7 @@ public class GameManager {
 
         String creationChoice = InputValidator.getStringInput("Do you want a fast default creation?: ", confCommands);
         if (Objects.equals(creationChoice, "yes")) {
-            this.player = new Player("Player", "white");
+            this.player = new Player("Player", "white", scoreAndCoins);
         } else {
             String name = InputValidator.getNonEmptyString("Enter name: ");
             String color = InputValidator.getStringInput("Enter color: ", colorCommands);
@@ -57,9 +70,9 @@ public class GameManager {
                 String petType = InputValidator.getStringInput("Cat or dog?: ", petTypeCommands);
                 String petName = InputValidator.getNonEmptyString("Enter pet's name: ");
                 Pet pet = new Pet(petName, petType);
-                this.player = new Player(name, color, pet);
+                this.player = new Player(name, color, pet, scoreAndCoins);
             } else {
-                this.player = new Player(name, color);
+                this.player = new Player(name, color, scoreAndCoins);
             }
         }
         frame.setPlayerColor(Color.toColor(player.getColor()));
@@ -80,6 +93,7 @@ public class GameManager {
                  UserInterface.clearScreen();
                  System.out.println("Game over");
                  UserInterface.threadSleep(3000);
+                 scoreAndCoins.saveScore(player.getName(), time.getDay());
                  startMenu();
              }
         }
@@ -143,7 +157,6 @@ public class GameManager {
                     System.out.println("Invalid action number!");
                 }
             } catch (NumberFormatException e) {
-                // if not number - check locations
                 if (!world.moveToLocation(input)) {
                     switch (input) {
                         case "godmode123":

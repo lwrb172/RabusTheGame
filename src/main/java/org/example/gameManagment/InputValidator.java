@@ -16,7 +16,6 @@ public class InputValidator {
                 }
                 System.out.printf("Choose number between %d and %d!\n", min, max);
             } catch (NumberFormatException e) {
-                UserInterface.clearScreen();
                 System.out.println("It has to be a number!");
             }
         }

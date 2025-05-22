@@ -6,23 +6,20 @@ import org.example.gameManagment.UserInterface;
 
 public class WashAction implements Action{
     public void execute(Player player, TimeManager time) {
-        player.decreaseStats(20,10,0);
-
-        player.setEnergy(Math.min(player.getEnergy()+hours*15, 100));
+        player.setHygiene(100);
         if (!player.getGodMode()){
-            player.setHunger(Math.max(player.getHunger() - hours * 2, 0));
+            player.decreaseStatsNoComment(20,10,0);
         }
-
         UserInterface.clearScreen();
-        System.out.println("You slept for " + hours + " hours.");
+        System.out.println("You washed yourself and now you feel a lot better.");
         UserInterface.threadSleep(2000);
     }
 
     public String getName() {
-        return "";
+        return "Wash yourself";
     }
 
     public String getDescription() {
-        return "";
+        return "It's time to take a hot bath.";
     }
 }

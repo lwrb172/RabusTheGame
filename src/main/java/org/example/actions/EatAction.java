@@ -15,12 +15,13 @@ public class EatAction implements Action {
         List<Item> foods = printFoods(player);
 
         if (!foods.isEmpty()) {
-            String chosenFood = String.valueOf(InputValidator.getIntInput("", 1, player.getInventory().toArray().length));
+            int chosenFood = InputValidator.getIntInput("", 1, player.getInventory().toArray().length);
 
-            Item food = foods.get(Integer.parseInt(chosenFood) - 1);
+            Item food = foods.get(chosenFood - 1);
             player.setHunger(Math.min(player.getHunger() + food.getEffectValue(), 100));
+            player.decreaseStats(0, 15, 15);
             UserInterface.clearScreen();
-            System.out.println("You have eaten and regenerated " + food.getEffectValue() + " hunger.");
+            System.out.println("You have eaten " + foods.get(chosenFood - 1).getName() + " and regenerated " + food.getEffectValue() + " hunger.");
             UserInterface.threadSleep(2000);
             player.getInventory().remove(food);
         }

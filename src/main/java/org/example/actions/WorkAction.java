@@ -10,7 +10,8 @@ public class WorkAction implements Action {
     @Override
     public void execute(Player player, TimeManager time) {
         player.getJob().startJob(player.getJob().getJobName());
-        player.setWorkUpdate();
+        player.decreaseStatsNoComment(15, 15, 15);
+        player.setShouldNotUpdate();
     }
 
     @Override

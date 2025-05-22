@@ -26,7 +26,7 @@ public class RobberyEvent implements Event {
 
     @Override
     public boolean timeTrigger(TimeManager time) {
-        if (time.getHour() >= 22) {
+        if (time.getHour() >= 22 || (time.getHour() >= 0 && time.getHour() <= 6)) {
             return rand.nextInt(100) < 30;
         }
         return false;
@@ -34,6 +34,7 @@ public class RobberyEvent implements Event {
 
     @Override
     public void trigger(Player player) {
+        UserInterface.clearScreen();
         frame.setNPC(rabus);
         frame.printMainRoom();
         frame.setNPC(noNPC);
@@ -52,7 +53,7 @@ public class RobberyEvent implements Event {
             UserInterface.clearScreen();
             System.out.print("Too bad, you lost ;)");
             UserInterface.threadSleep(3000);
-            if (rand.nextInt(100) < 30) {
+            if (rand.nextInt(100) < 20) {
                 player.death("Rabuś killed you!");
             } else {
                 int x = rand.nextInt(100, 500);
