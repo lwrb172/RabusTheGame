@@ -1,7 +1,6 @@
-package org.example.gameManagment;
+package org.example.gameManagement;
 
 import org.example.actions.*;
-import org.example.entities.NPC;
 import org.example.entities.Player;
 import org.example.events.Event;
 import org.example.events.RobberyEvent;
@@ -14,14 +13,12 @@ import java.util.Map;
 
 public class World {
     private final Map<String, Location> locations;
-    private final Map<String, NPC> npcs;
     private final List<Event> events;
     private Location currentLocation;
     private final Frame frame;
 
     public World(Frame frame) {
         locations = new HashMap<>();
-        npcs = new HashMap<>();
         events = new ArrayList<>();
         this.frame = frame;
         initWorld();
@@ -42,20 +39,13 @@ public class World {
         locations.put("park", park);
 
         mainRoom.addAction(new SleepAction());
-        mainRoom.addAction(new TalkAction());
         mainRoom.addAction(new ChooseJob());
         mainRoom.addAction(new WorkAction());
         shop.addAction(new BuyFoodAction());
         shop.addAction(new BuyFurnitureAction(frame));
         kitchen.addAction(new EatAction());
         bathroom.addAction(new WashAction());
-
-        NPC helper = new NPC("helper", "This is a NPC. He will guide you and provide help trough your adventures.");
-        NPC cashier = new NPC("Cashier", "shop cashier.");
-        npcs.put("cashier", cashier);
-
-        mainRoom.addNPC(helper);
-        shop.addNPC(cashier);
+        park.addAction(new PlayPetAction(frame));
 
         currentLocation = mainRoom;
     }
@@ -67,7 +57,9 @@ public class World {
     public void checkEvents(Player player, TimeManager time) {
         for (Event event : events) {
             if (event.timeTrigger(time)) {
-                event.trigger(player);
+                if (currentLocation.getName().equals("Main Room") && !(player.getGameOver())) {
+                    event.trigger(player);
+                }
             }
         }
     }
@@ -79,17 +71,6 @@ public class World {
             return true;
         }
         return false;
-    }
-
-    public List<NPC> getCurrentNPCs(int currentHour) {
-        List<NPC> presentNPCs = new ArrayList<>();
-
-        for (NPC npc : npcs.values()) {
-            if (npc.getCurrentLocation(currentHour).equals(currentLocation.getName().toLowerCase())) {
-                presentNPCs.add(npc);
-            }
-        }
-        return presentNPCs;
     }
 
     public Location getCurrentLocation() {

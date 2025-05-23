@@ -1,4 +1,4 @@
-package org.example.gameManagment;
+package org.example.gameManagement;
 
 import org.example.actions.Action;
 import org.example.entities.Pet;
@@ -39,9 +39,9 @@ public class GameManager {
             case 2:
                 if (this.player == null) {
                     UserInterface.clearScreen();
-                    System.out.println("Nothing here yet!");
+                    System.out.println("Nothing here yet! First let's create a character.");
                     UserInterface.threadSleep(3000);
-                    startMenu();
+                    createCharacter();
                 }
                 UserInterface.clearScreen();
                 player.getScoreAndCoins().printScores();
@@ -68,6 +68,12 @@ public class GameManager {
             String petChoice = InputValidator.getStringInput("Do you want a pet?: ", confCommands);
             if (Objects.equals(petChoice, "yes")) {
                 String petType = InputValidator.getStringInput("Cat or dog?: ", petTypeCommands);
+                String petColor = InputValidator.getStringInput("Pet's color: ", colorCommands);
+                if (petType.equals("cat")) {
+                    frame.setCatColor(Color.toColor(petColor));
+                } else {
+                    frame.setDogColor(Color.toColor(petColor));
+                }
                 String petName = InputValidator.getNonEmptyString("Enter pet's name: ");
                 Pet pet = new Pet(petName, petType);
                 this.player = new Player(name, color, pet, scoreAndCoins);
@@ -155,6 +161,7 @@ public class GameManager {
                     actions.get(actionIndex - 1).execute(player, time);
                 } else {
                     System.out.println("Invalid action number!");
+                    player.setShouldNotUpdate();
                 }
             } catch (NumberFormatException e) {
                 if (!world.moveToLocation(input)) {
@@ -171,6 +178,7 @@ public class GameManager {
                             break;
                         default:
                             System.out.println("Invalid command!");
+                            player.setShouldNotUpdate();
                             break;
                     }
                 }

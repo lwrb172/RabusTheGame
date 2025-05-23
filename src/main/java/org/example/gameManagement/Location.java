@@ -1,7 +1,6 @@
-package org.example.gameManagment;
+package org.example.gameManagement;
 
 import org.example.actions.Action;
-import org.example.entities.NPC;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,35 +9,15 @@ public class Location {
     private String name;
     private String description;
     private List<Action> actions;
-    private List<NPC> npcs;
 
     public Location(String name, String description) {
         this.name = name;
         this.description = description;
         this.actions = new ArrayList<>();
-        this.npcs = new ArrayList<>();
     }
 
     public void addAction(Action action) {
         this.actions.add(action);
-    }
-
-    public void removeAction(Action action) {
-        this.actions.remove(action);
-    }
-
-    public void displayActions() {
-        for (Action action : actions) {
-            System.out.println(action);
-        }
-    }
-
-    public void addNPC(NPC npc) {
-        npcs.add(npc);
-    }
-
-    public List<NPC> getNpcs() {
-        return new ArrayList<>(npcs);
     }
 
     public String getName() {
@@ -59,7 +38,6 @@ public class Location {
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", actions=" + actions +
-                ", npcs=" + npcs +
                 '}';
     }
 }

@@ -1,8 +1,8 @@
-package org.example.gameManagment.job;
+package org.example.gameManagement.job;
 
 import org.example.frames.Color;
-import org.example.gameManagment.ScoreAndCoins;
-import org.example.gameManagment.UserInterface;
+import org.example.gameManagement.ScoreAndCoins;
+import org.example.gameManagement.UserInterface;
 
 import java.time.Duration;
 import java.time.Instant;

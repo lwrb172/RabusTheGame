@@ -1,9 +1,8 @@
-package org.example.gameManagment.job;
+package org.example.gameManagement.job;
 
-import org.example.entities.Player;
-import org.example.gameManagment.InputValidator;
-import org.example.gameManagment.ScoreAndCoins;
-import org.example.gameManagment.UserInterface;
+import org.example.gameManagement.InputValidator;
+import org.example.gameManagement.ScoreAndCoins;
+import org.example.gameManagement.UserInterface;
 
 public class Job {
     private String jobName;
@@ -19,9 +18,9 @@ public class Job {
     public void chooseJob() {
         UserInterface.clearScreen();
         int jobChoice = InputValidator.getIntInput("What job do you wanna take? \n" +
-                "1. glovo (snake)\n" +
-                "2. collecting strawberries in Germany (tic-tac-toe)\n" +
-                "3. become parliamentary representative (typing game)\n",
+                "1. Glovo (Memory)\n" +
+                "2. Collecting strawberries in Germany (Tic-Tac-Toe)\n" +
+                "3. Become parliamentary representative (Typing)\n",
                 1, 3
         );
         switch (jobChoice) {

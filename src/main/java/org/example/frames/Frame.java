@@ -1,10 +1,6 @@
 package org.example.frames;
 
-import org.example.gameManagment.Item;
-import org.example.entities.NPC;
-import org.example.gameManagment.UserInterface;
-
-import java.util.Random;
+import org.example.gameManagement.Item;
 
 public class Frame {
     private static final String[] coinFrames = {
@@ -116,18 +112,6 @@ public class Frame {
             Color.GRAY + " / \\" + Color.RESET
     };
 
-    private final String[] npc1 = {
-            Color.YELLOW + "  O  " + Color.RESET,
-            Color.YELLOW + " /|\\" + Color.RESET,
-            Color.YELLOW + " / \\" + Color.RESET
-    };
-
-    private final String[] npc2 = {
-            Color.RED + "  O  " + Color.RESET,
-            Color.RED + " /|\\" + Color.RESET,
-            Color.RED + " / \\" + Color.RESET
-    };
-
     private final String[] noNPC = {
             "     ",
             "    ",
@@ -138,6 +122,20 @@ public class Frame {
             "     ",
             "    ",
             "    "
+    };
+
+    private String[] catBody = {
+            "",
+            "",
+            ""
+    };
+
+    private String[] dogBody = {
+            "",
+            "",
+            "",
+            "",
+            ""
     };
 
     private String[] npcBody = {
@@ -169,7 +167,9 @@ public class Frame {
 
     public String[] getCoinFrames() { return coinFrames; }
 
-    public void printPlayer() { System.out.print(playerBody[0] + '\n' + playerBody[1] + '\n' + playerBody[2] + '\n'); }
+    public void printCat() { System.out.print(catBody[0] + '\n' + catBody[1] + '\n' + catBody[2] + '\n'); }
+
+    public void printDog() { System.out.print(dogBody[0] + '\n' + dogBody[1] + '\n' + dogBody[2] + '\n' + dogBody[3] + '\n' + dogBody[4] + '\n'); }
 
     public void printMainRoom() {
         System.out.println(Color.RED + "\n ----------------------------------------------------------" + Color.RESET);
@@ -274,21 +274,26 @@ public class Frame {
         playerBody[2] = color + " / \\" + Color.RESET;
     }
 
-    public void setNPC(NPC npc) {
-        switch (npc.getName()) {
-            case "Rabuś" -> {
-                insert(rabus, npcBody);
-            }
-            case "Kacper" -> {
-                insert(npc1, npcBody);
-            }
-            case "Oliwier" -> {
-                insert(npc2, npcBody);
-            }
-            default -> {
-                insert(noNPC, npcBody);
-            }
-        }
+    public void setCatColor(Color color) {
+        catBody[0] = color + " /\\_/\\ " + Color.RESET;
+        catBody[1] = color + "( o.o )" + Color.RESET;
+        catBody[2] = color + " > ^ < " + Color.RESET;
+    }
+
+    public void setDogColor(Color color) {
+        dogBody[0] = color + ",'.-.'. " + Color.RESET;
+        dogBody[1] = color + "'\\~ o/` ,," + Color.RESET;
+        dogBody[2] = color + " { @ } f" + Color.RESET;
+        dogBody[3] = color + " /`-'\\$ " + Color.RESET;
+        dogBody[4] = color + "(_/-\\_) " + Color.RESET;
+    }
+
+    public void setRabus() {
+        insert(rabus, npcBody);
+    }
+
+    public void setNoRabus() {
+        insert(noNPC, npcBody);
     }
 
     public void setItemMainRoom(Item item) {

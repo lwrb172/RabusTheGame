@@ -1,12 +1,11 @@
 package org.example.events;
 
-import org.example.entities.NPC;
 import org.example.entities.Player;
 import org.example.frames.Color;
 import org.example.frames.Frame;
-import org.example.gameManagment.InputValidator;
-import org.example.gameManagment.TimeManager;
-import org.example.gameManagment.UserInterface;
+import org.example.gameManagement.InputValidator;
+import org.example.gameManagement.TimeManager;
+import org.example.gameManagement.UserInterface;
 
 import java.util.HashSet;
 import java.util.Random;
@@ -15,13 +14,9 @@ import java.util.Set;
 public class RobberyEvent implements Event {
     Random rand = new Random();
     private final Frame frame;
-    private final NPC rabus;
-    private final NPC noNPC;
 
     public RobberyEvent(Frame frame) {
         this.frame = frame;
-        this.rabus = new NPC("Rabuś", "Evil thief.");
-        this.noNPC = new NPC("", "");
     }
 
     @Override
@@ -34,34 +29,33 @@ public class RobberyEvent implements Event {
 
     @Override
     public void trigger(Player player) {
-        UserInterface.clearScreen();
-        frame.setNPC(rabus);
-        frame.printMainRoom();
-        frame.setNPC(noNPC);
-        System.out.println("Hands up, this is a robbery! Call it right and I might let you go...");
-        Set<String> coinSides = new HashSet<>(Set.of("heads", "tails"));
-        String choice = InputValidator.getStringInput("Enter coin side: ", coinSides);
-        String result = printCoinFlip(frame);
+            UserInterface.clearScreen();
+            frame.setRabus();
+            frame.printMainRoom();
+            frame.setNoRabus();
+            System.out.println("Hands up, this is a robbery! Call it right and I might let you go...");
+            Set<String> coinSides = new HashSet<>(Set.of("heads", "tails"));
+            String choice = InputValidator.getStringInput("Enter coin side: ", coinSides);
+            String result = printCoinFlip(frame);
 
-        if(result.toLowerCase().equals(choice)) {
-            UserInterface.clearScreen();
-            System.out.print("I'm letting you go... this time.\nYou got " + Color.CYAN + "10000" + Color.RESET + " points!");
-            UserInterface.threadSleep(3000);
-            player.addRabusStreak();
-            player.addScore(10000);
-        } else {
-            UserInterface.clearScreen();
-            System.out.print("Too bad, you lost ;)");
-            UserInterface.threadSleep(3000);
-            if (rand.nextInt(100) < 20) {
-                player.death("Rabuś killed you!");
-            } else {
-                int x = rand.nextInt(100, 500);
+            if (result.toLowerCase().equals(choice)) {
                 UserInterface.clearScreen();
-                System.out.println("You lost " + Color.YELLOW + x + Color.RESET + " coins.");
-                player.decreaseCoins(x);
+                System.out.print("I'm letting you go... this time.\nYou got " + Color.CYAN + "10000" + Color.RESET + " points!");
                 UserInterface.threadSleep(3000);
-            }
+                player.addScore(10000);
+            } else {
+                UserInterface.clearScreen();
+                System.out.print("Too bad, you lost ;)");
+                UserInterface.threadSleep(3000);
+                if (rand.nextInt(100) < 20) {
+                    player.death("Rabuś killed you!");
+                } else {
+                    int x = rand.nextInt(100, 500);
+                    UserInterface.clearScreen();
+                    System.out.println("You lost " + Color.YELLOW + x + Color.RESET + " coins.");
+                    player.decreaseCoins(x);
+                    UserInterface.threadSleep(3000);
+                }
         }
     }
 
@@ -89,7 +83,7 @@ public class RobberyEvent implements Event {
     }
 
     public String getName() {
-        return "Rabuś!";
+        return "Rabus";
     }
 
     public String getDescription() {

@@ -1,4 +1,4 @@
-package org.example.gameManagment;
+package org.example.gameManagement;
 
 public class UserInterface {
     public static void showMessage(String message) {
@@ -11,9 +11,8 @@ public class UserInterface {
     }
 
     public static void clearScreen() {
-        System.out.println("\n".repeat(50));
-        //System.out.print("\033[H\033[2J");
-        //System.out.flush();
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 
     public static void threadSleep(int milis) {

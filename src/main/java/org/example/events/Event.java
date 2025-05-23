@@ -1,7 +1,7 @@
 package org.example.events;
 
 import org.example.entities.Player;
-import org.example.gameManagment.TimeManager;
+import org.example.gameManagement.TimeManager;
 
 public interface Event {
     boolean timeTrigger(TimeManager time);

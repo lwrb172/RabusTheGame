@@ -1,4 +1,4 @@
-package org.example.gameManagment;
+package org.example.gameManagement;
 
 import org.example.frames.Color;
 
@@ -8,13 +8,11 @@ import java.util.Random;
 public class ScoreAndCoins {
     private int playerScore;
     private int playerCoins;
-    private int playerRabusStreak; //todo
     Random random;
 
     public ScoreAndCoins() {
         this.playerScore = 0;
         this.playerCoins = 50;
-        this.playerRabusStreak = 0;
         this.random = new Random();
     }
 
@@ -132,8 +130,6 @@ public class ScoreAndCoins {
             System.out.println("Error saveScore(): " + e.getMessage());
         }
     }
-
-    public void addRabusStreak() { playerRabusStreak++; }
 
     public int getPlayerCoins() { return playerCoins; }
 

@@ -1,8 +1,8 @@
 package org.example.actions;
 
 import org.example.entities.Player;
-import org.example.gameManagment.TimeManager;
-import org.example.gameManagment.UserInterface;
+import org.example.gameManagement.TimeManager;
+import org.example.gameManagement.UserInterface;
 
 public class WashAction implements Action{
     public void execute(Player player, TimeManager time) {

@@ -1,10 +1,10 @@
-package org.example.gameManagment.job;
+package org.example.gameManagement.job;
 
 import org.example.frames.Color;
 import org.example.frames.Frame;
-import org.example.gameManagment.InputValidator;
-import org.example.gameManagment.ScoreAndCoins;
-import org.example.gameManagment.UserInterface;
+import org.example.gameManagement.InputValidator;
+import org.example.gameManagement.ScoreAndCoins;
+import org.example.gameManagement.UserInterface;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -70,16 +70,6 @@ public class Memory {
         }
 
         System.arraycopy(values, 0, cards, 0, values.length);
-    }
-
-    private void printCardsNumeric() {
-        for (int i = 0; i < cards.length; i++) {
-            System.out.print(cards[i] + " ");
-            if ((i + 1) % 4 == 0) {
-                System.out.println();
-            }
-        }
-        System.out.println();
     }
 
     public void printCards() {

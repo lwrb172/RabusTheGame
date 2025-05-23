@@ -2,10 +2,10 @@ package org.example.actions;
 
 import org.example.entities.Player;
 import org.example.frames.Frame;
-import org.example.gameManagment.InputValidator;
-import org.example.gameManagment.Item;
-import org.example.gameManagment.TimeManager;
-import org.example.gameManagment.UserInterface;
+import org.example.gameManagement.InputValidator;
+import org.example.gameManagement.Item;
+import org.example.gameManagement.TimeManager;
+import org.example.gameManagement.UserInterface;
 
 import java.util.List;
 
@@ -14,14 +14,14 @@ public class BuyFurnitureAction implements Action{
     private final Frame frame;
 
     public BuyFurnitureAction(Frame frame) {
-        furnitures = List.of( // todo wymyślić do czego effect value
-                new Item("tv", "big ass tv", 1750, "furniture", 50, "main room"),
-                new Item("dresser", "you can store things there (not implemented in game)", 750, "furniture", 30, "main room"),
-                new Item("sofa", "sofa", 1500, "furniture", 45, "main room"),
-                new Item("shower", "shower", 1500, "furniture", 50, "bathroom"),
-                new Item("bath", "bath", 1750, "furniture", 50, "bathroom"),
-                new Item("table", "table", 750, "furniture", 30, "kitchen"),
-                new Item("oven", "oven", 1500, "furniture", 50, "kitchen")
+        furnitures = List.of(
+                new Item("tv", "big ass tv", 1750, "furniture", 0, "main room"),
+                new Item("dresser", "you can store things there (not implemented in game)", 750, "furniture", 0, "main room"),
+                new Item("sofa", "sofa", 1500, "furniture", 0, "main room"),
+                new Item("shower", "shower", 1500, "furniture", 0, "bathroom"),
+                new Item("bath", "bath", 1750, "furniture", 0, "bathroom"),
+                new Item("table", "table", 750, "furniture", 0, "kitchen"),
+                new Item("oven", "oven", 1500, "furniture", 0, "kitchen")
         );
         this.frame = frame;
     }

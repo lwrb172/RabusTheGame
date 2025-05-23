@@ -1,9 +1,9 @@
 package org.example.actions;
 
 import org.example.entities.Player;
-import org.example.gameManagment.InputValidator;
-import org.example.gameManagment.TimeManager;
-import org.example.gameManagment.UserInterface;
+import org.example.gameManagement.InputValidator;
+import org.example.gameManagement.TimeManager;
+import org.example.gameManagement.UserInterface;
 
 public class SleepAction implements Action {
     @Override

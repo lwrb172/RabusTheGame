@@ -1,4 +1,4 @@
-package org.example.gameManagment;
+package org.example.gameManagement;
 
 public class TimeManager {
     private int day;

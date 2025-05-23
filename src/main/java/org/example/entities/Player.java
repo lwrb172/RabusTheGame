@@ -1,10 +1,10 @@
 package org.example.entities;
 
 import org.example.frames.Color;
-import org.example.gameManagment.Item;
-import org.example.gameManagment.ScoreAndCoins;
-import org.example.gameManagment.UserInterface;
-import org.example.gameManagment.job.Job;
+import org.example.gameManagement.Item;
+import org.example.gameManagement.ScoreAndCoins;
+import org.example.gameManagement.UserInterface;
+import org.example.gameManagement.job.Job;
 
 import java.util.*;
 
@@ -18,7 +18,6 @@ public class Player {
     private Pet pet;
     private final Job job;
     private final List<Item> inventory;
-
     private boolean gameOver;
     private boolean shouldNotUpdate;
     private boolean godMode;
@@ -99,6 +98,8 @@ public class Player {
         return inventory;
     }
 
+    public Pet getPet() { return pet; }
+
     public String getPetName() { return pet.getName(); }
 
     public String getPetType() { return pet.getType(); }
@@ -117,10 +118,6 @@ public class Player {
         return energy;
     }
 
-    public int getHygiene() {
-        return hygiene;
-    }
-
     public void setHunger(int hunger) {
         this.hunger = hunger;
     }
@@ -131,10 +128,6 @@ public class Player {
 
     public void setHygiene(int hygiene) {
         this.hygiene = hygiene;
-    }
-
-    public Object getPet() {
-        return null;
     }
 
     public ScoreAndCoins getScoreAndCoins() { return scoreAndCoins; }
@@ -182,8 +175,6 @@ public class Player {
     public void enableGodMode() { this.godMode = true; }
 
     public boolean getGodMode() { return godMode; }
-
-    public void addRabusStreak() { scoreAndCoins.addRabusStreak(); }
 
     public void addScore(int amount) { scoreAndCoins.addPlayerScore(amount); }
 

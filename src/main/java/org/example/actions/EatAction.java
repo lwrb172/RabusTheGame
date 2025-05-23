@@ -1,13 +1,12 @@
 package org.example.actions;
 
-import org.example.gameManagment.InputValidator;
-import org.example.gameManagment.Item;
+import org.example.gameManagement.InputValidator;
+import org.example.gameManagement.Item;
 import org.example.entities.Player;
-import org.example.gameManagment.TimeManager;
-import org.example.gameManagment.UserInterface;
+import org.example.gameManagement.TimeManager;
+import org.example.gameManagement.UserInterface;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class EatAction implements Action {
     @Override

@@ -1,4 +1,4 @@
-package org.example.gameManagment;
+package org.example.gameManagement;
 
 import java.util.Scanner;
 import java.util.Set;

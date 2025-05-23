@@ -1,10 +1,9 @@
-package org.example.gameManagment.job;
+package org.example.gameManagement.job;
 
-import org.example.entities.Player;
 import org.example.frames.Color;
-import org.example.gameManagment.InputValidator;
-import org.example.gameManagment.ScoreAndCoins;
-import org.example.gameManagment.UserInterface;
+import org.example.gameManagement.InputValidator;
+import org.example.gameManagement.ScoreAndCoins;
+import org.example.gameManagement.UserInterface;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -66,28 +65,25 @@ public class TicTacToe {
     }
 
     private void compMove() {
-        // Najpierw sprawdź czy komputer może wygrać
         for (int i = 0; i < 9; i++) {
             if (board[i] == 0) {
                 board[i] = -1;
-                if (checkWin(-1)) return; // Znalazł ruch wygrywający
+                if (checkWin(-1)) return;
                 board[i] = 0;
             }
         }
 
-        // Jeśli nie, zablokuj gracza jeśli może wygrać
         for (int i = 0; i < 9; i++) {
             if (board[i] == 0) {
                 board[i] = 1;
                 if (checkWin(1)) {
-                    board[i] = -1; // Zablokuj
+                    board[i] = -1;
                     return;
                 }
                 board[i] = 0;
             }
         }
 
-        // W przeciwnym razie losowy ruch
         int compChoice;
         do {
             compChoice = random.nextInt(9);
@@ -138,7 +134,6 @@ public class TicTacToe {
 
     private void addClearPrint(String whoWon, String playerName) {
         UserInterface.clearScreen();
-
         printBoard();
         switch (whoWon) {
             case "player":
@@ -154,17 +149,11 @@ public class TicTacToe {
                 System.out.println("It's a draw.");
                 break;
         }
-
         Arrays.fill(board, 0);
         System.out.println("Scores:\n   " + playerName + ": " + Color.GREEN + gameScores[0] +
                 Color.RESET + " | Comp: " + Color.RED + gameScores[1] + Color.RESET +" | Draws: "
                 + Color.GRAY + gameScores[2] + Color.RESET);
-
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            System.err.println(e.getMessage());
-        }
+        UserInterface.threadSleep(3000);
     }
 
 }

@@ -1,7 +1,7 @@
 package org.example.actions;
 
 import org.example.entities.Player;
-import org.example.gameManagment.TimeManager;
+import org.example.gameManagement.TimeManager;
 
 public class ChooseJob implements Action {
     @Override
