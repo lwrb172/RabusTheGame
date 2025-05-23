@@ -12,7 +12,7 @@ You’re just another wage slave in a bleak, pixelated city where:
 
     Every paycheck disappears instantly - life is rough!
 
-    ![scr3](https://github.com/user-attachments/assets/91df44e6-7a01-40c3-b7fa-b6cffa428806)
+![scr3](https://github.com/user-attachments/assets/a0396fe6-c083-41b4-a5fd-117db4d4bede)
 
 ## 🏠 "Decorating" Your Apartment
 
@@ -22,7 +22,7 @@ You’re just another wage slave in a bleak, pixelated city where:
 
     It will never leave you.
 
-    ![scr2](https://github.com/user-attachments/assets/99fc8ced-4e4e-436d-806a-a26c26cd4168)
+![scr2](https://github.com/user-attachments/assets/99fc8ced-4e4e-436d-806a-a26c26cd4168)
 
 ## 👊 Your worst enemy? Rabus.
 
@@ -32,7 +32,7 @@ You’re just another wage slave in a bleak, pixelated city where:
 
     Your weapon? An old coin, only it can save your life.
 
-    ![scr4](https://github.com/user-attachments/assets/9b796fe7-29da-4b28-b915-c8629e64afdf)
+![scr4](https://github.com/user-attachments/assets/9b796fe7-29da-4b28-b915-c8629e64afdf)
 
 🎮 Game Over Conditions:
 
