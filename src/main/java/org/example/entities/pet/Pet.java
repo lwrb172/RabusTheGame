@@ -1,10 +1,10 @@
-package org.example.entities;
+package org.example.entities.pet;
 
 public class Pet {
     private final String name;
-    private final String type;
+    private final PetType type;
 
-    public Pet(String name, String type) {
+    public Pet(String name, PetType type) {
         this.name = name;
         this.type = type;
     }
@@ -13,7 +13,7 @@ public class Pet {
         return name;
     }
 
-    public String getType() {
+    public PetType getType() {
         return type;
     }
 }

@@ -1,4 +1,4 @@
-package org.example.gameManagement.job;
+package org.example.gameManagement.job.tictactoe;
 
 import org.example.frames.Color;
 import org.example.gameManagement.InputValidator;
@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class TicTacToe {
-    private final int[] gameScores = new int[3]; // player, comp, draw
+    private final GameScore[] gameScores = new GameScore[3];
     private final int[] board = new int[9];
     private final String playerName;
     private final ScoreAndCoins playerScoreCoins;
@@ -18,6 +18,9 @@ public class TicTacToe {
     public TicTacToe(String playerName, ScoreAndCoins playerScoreCoins) {
         this.playerName = playerName;
         this.playerScoreCoins = playerScoreCoins;
+        gameScores[0] = GameScore.Player;
+        gameScores[1] = GameScore.Computer;
+        gameScores[2] = GameScore.Draw;
     }
 
     public void start() {
@@ -38,9 +41,9 @@ public class TicTacToe {
 
     private boolean checkGameEnd() {
         for (int i = 0; i < 3; i++) {
-            if (gameScores[i] == 3) {
+            if (gameScores[i].getScore() == 3) {
                 UserInterface.clearScreen();
-                playerScoreCoins.addScoreCoinsTicTacToe(i, gameScores[1]);
+                playerScoreCoins.addScoreCoinsTicTacToe(i, gameScores[1].getScore());
                 return true;
             }
         }
@@ -137,22 +140,22 @@ public class TicTacToe {
         printBoard();
         switch (whoWon) {
             case "player":
-                gameScores[0]++;
+                gameScores[0].addScore();
                 System.out.println("You won a round!");
                 break;
             case "comp":
-                gameScores[1]++;
+                gameScores[1].addScore();
                 System.out.println("Comp has won a round...");
                 break;
             case "draw":
-                gameScores[2]++;
+                gameScores[2].addScore();
                 System.out.println("It's a draw.");
                 break;
         }
         Arrays.fill(board, 0);
-        System.out.println("Scores:\n   " + playerName + ": " + Color.GREEN + gameScores[0] +
-                Color.RESET + " | Comp: " + Color.RED + gameScores[1] + Color.RESET +" | Draws: "
-                + Color.GRAY + gameScores[2] + Color.RESET);
+        System.out.println("Scores:\n   " + playerName + ": " + Color.GREEN + gameScores[0].getScore() +
+                Color.RESET + " | Comp: " + Color.RED + gameScores[1].getScore() + Color.RESET +" | Draws: "
+                + Color.GRAY + gameScores[2].getScore() + Color.RESET);
         UserInterface.threadSleep(3000);
     }
 

@@ -1,5 +1,7 @@
 package org.example.entities;
 
+import org.example.entities.pet.Pet;
+import org.example.entities.pet.PetType;
 import org.example.frames.Color;
 import org.example.gameManagement.Item;
 import org.example.gameManagement.ScoreAndCoins;
@@ -15,28 +17,12 @@ public class Player {
     private int energy;
     private int hygiene;
     private final ScoreAndCoins scoreAndCoins;
-    private Pet pet;
+    private final Pet pet;
     private final Job job;
     private final List<Item> inventory;
     private boolean gameOver;
     private boolean shouldNotUpdate;
     private boolean godMode;
-
-    public Player(String name, String color, ScoreAndCoins scoreAndCoins) {
-        this.name = name;
-        this.color = color;
-        this.hunger = 100;
-        this.energy = 100;
-        this.hygiene = 100;
-        this.gameOver = false;
-        this.scoreAndCoins = scoreAndCoins;
-        this.job = new Job(getName(), getScoreAndCoins());
-        this.inventory = new ArrayList<>();
-        this.shouldNotUpdate = true;
-        this.godMode = false;
-        inventory.add(new Item("Apple", "", 10, "food", 20));
-        inventory.add(new Item("Banana", "", 12, "food", 20));
-    }
 
     public Player(String name, String color, Pet pet, ScoreAndCoins scoreAndCoins) {
         this.name = name;
@@ -45,19 +31,19 @@ public class Player {
         this.hunger = 100;
         this.energy = 100;
         this.hygiene = 100;
-        this.job = new Job(getName(), getScoreAndCoins());
         this.scoreAndCoins = scoreAndCoins;
+        this.job = new Job(getName(), getScoreAndCoins());
         this.inventory = new ArrayList<>();
         this.shouldNotUpdate = true;
         this.godMode = false;
-        inventory.add(new Item("Apple", "", 10, "food", 20));
-        inventory.add(new Item("Banana", "", 12, "food", 20));
+        inventory.add(new Item("Apple", "", 0, "food", 10));
+        inventory.add(new Item("Banana", "", 0, "food", 12));
     }
 
     public void update() {
         if (!godMode) {
             if (!shouldNotUpdate) {
-                decreaseStats(5, 10, 5);
+                decreaseStats(3,1,2);
             }
         }
         shouldNotUpdate = false;
@@ -102,7 +88,7 @@ public class Player {
 
     public String getPetName() { return pet.getName(); }
 
-    public String getPetType() { return pet.getType(); }
+    public PetType getPetType() { return pet.getType(); }
 
     public String getName() { return name; }
 

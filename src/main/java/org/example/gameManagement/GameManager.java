@@ -1,8 +1,9 @@
 package org.example.gameManagement;
 
 import org.example.actions.Action;
-import org.example.entities.Pet;
+import org.example.entities.pet.Pet;
 import org.example.entities.Player;
+import org.example.entities.pet.PetType;
 import org.example.frames.Frame;
 import org.example.frames.Color;
 
@@ -61,7 +62,8 @@ public class GameManager {
 
         String creationChoice = InputValidator.getStringInput("Do you want a fast default creation?: ", confCommands);
         if (Objects.equals(creationChoice, "yes")) {
-            this.player = new Player("Player", "white", scoreAndCoins);
+            Pet pet = new Pet("", PetType.NONE);
+            this.player = new Player("Player", "white", pet, scoreAndCoins);
         } else {
             String name = InputValidator.getNonEmptyString("Enter name: ");
             String color = InputValidator.getStringInput("Enter color: ", colorCommands);
@@ -75,10 +77,11 @@ public class GameManager {
                     frame.setDogColor(Color.toColor(petColor));
                 }
                 String petName = InputValidator.getNonEmptyString("Enter pet's name: ");
-                Pet pet = new Pet(petName, petType);
+                Pet pet = new Pet(petName, PetType.valueOf(petType.toUpperCase()));
                 this.player = new Player(name, color, pet, scoreAndCoins);
             } else {
-                this.player = new Player(name, color, scoreAndCoins);
+                Pet pet = new Pet("", PetType.NONE);
+                this.player = new Player(name, color, pet, scoreAndCoins);
             }
         }
         frame.setPlayerColor(Color.toColor(player.getColor()));
@@ -137,8 +140,9 @@ public class GameManager {
 
         UserInterface.showMessage("Available locations:");
         List<Location> locations = world.getAllLocations();
+        System.out.print("| ");
         for (Location location : locations) {
-            System.out.print(location.getName() + ' ');
+            System.out.print(location.getName() + " | ");
         }
 
         actions = world.getCurrentLocation().getActions();

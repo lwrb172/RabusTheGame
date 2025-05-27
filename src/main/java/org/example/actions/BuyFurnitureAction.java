@@ -15,8 +15,8 @@ public class BuyFurnitureAction implements Action{
 
     public BuyFurnitureAction(Frame frame) {
         furnitures = List.of(
-                new Item("tv", "big ass tv", 1750, "furniture", 0, "main room"),
-                new Item("dresser", "you can store things there (not implemented in game)", 750, "furniture", 0, "main room"),
+                new Item("tv", "tv", 1750, "furniture", 0, "main room"),
+                new Item("dresser", "dresser", 750, "furniture", 0, "main room"),
                 new Item("sofa", "sofa", 1500, "furniture", 0, "main room"),
                 new Item("shower", "shower", 1500, "furniture", 0, "bathroom"),
                 new Item("bath", "bath", 1750, "furniture", 0, "bathroom"),

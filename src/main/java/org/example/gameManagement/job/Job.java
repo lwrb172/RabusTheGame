@@ -3,6 +3,7 @@ package org.example.gameManagement.job;
 import org.example.gameManagement.InputValidator;
 import org.example.gameManagement.ScoreAndCoins;
 import org.example.gameManagement.UserInterface;
+import org.example.gameManagement.job.tictactoe.TicTacToe;
 
 public class Job {
     private String jobName;
@@ -50,11 +51,7 @@ public class Job {
             default:
                 UserInterface.clearScreen();
                 System.out.println("Choose your job first!\n");
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException e) {
-                    System.err.println(e.getMessage());
-                }
+                UserInterface.threadSleep(3000);
         }
     }
 

@@ -41,7 +41,7 @@ public class BuyFoodAction implements Action {
             player.setShouldNotUpdate();
             UserInterface.clearScreen();
             System.out.println("You bought: " + foods.get(choice - 1).getName() + '.');
-            UserInterface.threadSleep(3000);
+            UserInterface.threadSleep(2000);
         } else {
             UserInterface.clearScreen();
             System.out.println("You're too broke for that mate, go earn some money first!");

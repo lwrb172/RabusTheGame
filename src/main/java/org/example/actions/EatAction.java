@@ -18,7 +18,6 @@ public class EatAction implements Action {
 
             Item food = foods.get(chosenFood - 1);
             player.setHunger(Math.min(player.getHunger() + food.getEffectValue(), 100));
-            player.decreaseStats(0, 15, 15);
             UserInterface.clearScreen();
             System.out.println("You have eaten " + foods.get(chosenFood - 1).getName() + " and regenerated " + food.getEffectValue() + " hunger.");
             UserInterface.threadSleep(2000);

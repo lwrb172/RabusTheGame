@@ -1,6 +1,7 @@
 package org.example.actions;
 
 import org.example.entities.Player;
+import org.example.entities.pet.PetType;
 import org.example.frames.Frame;
 import org.example.gameManagement.TimeManager;
 import org.example.gameManagement.UserInterface;
@@ -14,10 +15,10 @@ public class PlayPetAction implements Action{
 
     public void execute(Player player, TimeManager time) {
         UserInterface.clearScreen();
-        if (player.getPet() == null) {
+        if (player.getPet().getType().equals(PetType.NONE)) {
             System.out.println("You don't have a pet :(");
         } else {
-            if (player.getPetType().equals("cat")) {
+            if (player.getPetType().equals(PetType.CAT)) {
                 frame.printCat();
             } else {
                 frame.printDog();
