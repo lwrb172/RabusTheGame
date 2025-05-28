@@ -188,4 +188,16 @@ public class GameManager {
                 }
             }
     }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public boolean isRunning() {
+        return isRunning;
+    }
+
+    public void setRunning(boolean running) {
+        isRunning = running;
+    }
 }
